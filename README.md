@@ -1,6 +1,6 @@
 # Filament-Json-Schema
 
-为 Filament Mod (https://modrinth.com/mod/filament) 提供 JSON Schema 支持，帮助开发者更轻松地编写和验证 Filament 数据包配置。
+为 [Filament Mod](https://modrinth.com/mod/filament) 提供 JSON Schema 支持，帮助开发者更轻松地编写和验证 Filament 数据包配置。
 
 ## 功能
 
