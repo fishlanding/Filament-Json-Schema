@@ -1,6 +1,6 @@
 # Filament-Json-Schema
 
-为 [Filament Mod](https://modrinth.com/mod/filament) 提供 JSON Schema 支持，帮助开发者更轻松地编写和验证 Filament 数据包配置。
+为 [Filament Mod](https://modrinth.com/mod/filament) 提供 JSON Schema 支持，帮助开发者更轻松地编写和验证 Filament 数据包。
 
 ## 功能
 
@@ -18,9 +18,8 @@
 
 ## 使用说明
 
-1. 在 VSCode 中安装 JSON Schema 支持插件（如已安装）
-2. 将本仓库添加到你的项目中
-3. 编辑 Filament 配置文件时，编辑器将自动提供智能提示和验证
+1. 将本仓库添加到你的 Filament 数据包根目录（即 `pack.mcmeta` 所在目录）中
+2. 编辑数据包时，编辑器将自动提供智能提示和验证
 
 ## 项目结构
 

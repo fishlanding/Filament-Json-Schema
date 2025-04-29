@@ -9,7 +9,7 @@
     ],
     "properties": {
         "id": {
-            "description": "实体的唯一标识符，格式为 '命名空间:实体名称'，用于在游戏中引用该实体。",
+            "description": "实体的唯一标识符，格式为 '<namespace>:<entityname>'，用于在游戏中引用该实体。",
             "type": "string",
             "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
             "examples": [
@@ -24,7 +24,10 @@
                 "type": "string"
             },
             "examples": [
-                ["can_breathe_underwater", "is_hostile"]
+                [
+                    "can_breathe_underwater",
+                    "is_hostile"
+                ]
             ]
         },
         "entity_type": {
@@ -67,24 +70,32 @@
             "properties": {
                 "model": {
                     "type": "string",
-                    "description": "实体模型的标识符，格式为 '命名空间:模型名称'，引用 Blockbench 模型。",
+                    "description": "实体模型的标识符，格式为 '<namespace>:<modelname>'，引用 Blockbench 模型。",
                     "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
-                    "examples": ["mynamespace:penguin"]
+                    "examples": [
+                        "mynamespace:penguin"
+                    ]
                 },
                 "walk_animation": {
                     "type": "string",
                     "description": "行走动画的标识符，引用模型中的动画名称。",
-                    "examples": ["walk"]
+                    "examples": [
+                        "walk"
+                    ]
                 },
                 "idle_animation": {
                     "type": "string",
                     "description": "空闲动画的标识符，引用模型中的动画名称。",
-                    "examples": ["idle"]
+                    "examples": [
+                        "idle"
+                    ]
                 },
                 "attack_animation": {
                     "type": "string",
                     "description": "攻击动画的标识符（可选），引用模型中的动画名称。",
-                    "examples": ["attack"]
+                    "examples": [
+                        "attack"
+                    ]
                 }
             },
             "required": [
@@ -104,7 +115,16 @@
                     "description": "实体碰撞箱的尺寸，格式为 [宽度, 高度]，单位为方块。",
                     "minItems": 2,
                     "maxItems": 2,
-                    "examples": [[0.5, 0.6], [0.5, 1.8]]
+                    "examples": [
+                        [
+                            0.5,
+                            0.6
+                        ],
+                        [
+                            0.5,
+                            1.8
+                        ]
+                    ]
                 },
                 "category": {
                     "type": "string",
@@ -117,79 +137,117 @@
                         "water_ambient",
                         "misc"
                     ],
-                    "examples": ["monster", "creature"]
+                    "examples": [
+                        "monster",
+                        "creature"
+                    ]
                 },
                 "xp_reward": {
                     "type": "integer",
                     "description": "实体死亡时掉落的经验值。",
                     "minimum": 0,
                     "default": 5,
-                    "examples": [5, 15]
+                    "examples": [
+                        5,
+                        15
+                    ]
                 },
                 "is_sun_sensitive": {
                     "type": "boolean",
                     "description": "是否对阳光敏感，启用后实体在阳光下会燃烧（如僵尸）。",
                     "default": false,
-                    "examples": [true, false]
+                    "examples": [
+                        true,
+                        false
+                    ]
                 },
                 "should_despawn_in_peaceful": {
                     "type": "boolean",
                     "description": "是否在和平模式下消失，通常用于敌对实体。",
                     "default": true,
-                    "examples": [true]
+                    "examples": [
+                        true,
+                        false
+                    ]
                 },
                 "invulnerable": {
                     "type": "boolean",
                     "description": "是否无敌，启用后实体无法受到任何伤害。",
                     "default": false,
-                    "examples": [false]
+                    "examples": [
+                        true,
+                        false
+                    ]
                 },
                 "fire_immune": {
                     "type": "boolean",
                     "description": "是否免疫火焰和熔岩伤害。",
                     "default": false,
-                    "examples": [false]
+                    "examples": [
+                        true,
+                        false
+                    ]
                 },
                 "no_save": {
                     "type": "boolean",
                     "description": "是否不保存到世界存档，启用后实体在世界保存时不会持久化。",
                     "default": false,
-                    "examples": [false]
+                    "examples": [
+                        true,
+                        false
+                    ]
                 },
                 "no_summon": {
                     "type": "boolean",
                     "description": "是否禁止通过命令或刷怪蛋召唤。",
                     "default": false,
-                    "examples": [false]
+                    "examples": [
+                        true,
+                        false
+                    ]
                 },
                 "no_physics": {
                     "type": "boolean",
                     "description": "是否忽略物理效果（如重力、碰撞）。",
                     "default": false,
-                    "examples": [false]
+                    "examples": [
+                        true,
+                        false
+                    ]
                 },
                 "can_use_portal": {
                     "type": "boolean",
                     "description": "是否可以使用下界传送门。",
                     "default": false,
-                    "examples": [true]
+                    "examples": [
+                        true,
+                        false
+                    ]
                 },
                 "can_be_leashed": {
                     "type": "boolean",
                     "description": "是否可以被拴绳牵引。",
                     "default": false,
-                    "examples": [true]
+                    "examples": [
+                        true,
+                        false
+                    ]
                 },
                 "despawn_when_far_away": {
                     "type": "boolean",
                     "description": "是否在远离玩家时消失，通常用于非持久化实体。",
                     "default": false,
-                    "examples": [false]
+                    "examples": [
+                        true,
+                        false
+                    ]
                 },
                 "offspring": {
                     "type": "string",
-                    "description": "繁殖产生的后代实体类型，格式为 '命名空间:实体名称'。",
-                    "examples": ["minecraft:pig"]
+                    "description": "繁殖产生的后代实体类型，格式为 '<namespace>:<entityname>'。",
+                    "examples": [
+                        "minecraft:pig"
+                    ]
                 },
                 "food": {
                     "type": "array",
@@ -197,14 +255,20 @@
                         "type": "string"
                     },
                     "description": "实体可以吃的物品列表，用于诱导或繁殖。",
-                    "examples": [["minecraft:sugar_cane"]]
+                    "examples": [
+                        [
+                            "minecraft:sugar_cane"
+                        ]
+                    ]
                 },
                 "ambient_sound_interval": {
                     "type": "integer",
                     "description": "环境音效播放的间隔（以游戏刻为单位，20刻=1秒）。",
                     "minimum": 0,
                     "default": 80,
-                    "examples": [80]
+                    "examples": [
+                        80
+                    ]
                 },
                 "sounds": {
                     "type": "object",
@@ -302,7 +366,11 @@
                         "type": "integer",
                         "description": "目标的优先级，值越低越优先执行。",
                         "minimum": 0,
-                        "examples": [1, 2, 8]
+                        "examples": [
+                            1,
+                            2,
+                            8
+                        ]
                     },
                     "items": {
                         "type": "array",
@@ -310,67 +378,97 @@
                             "type": "string"
                         },
                         "description": "与目标相关的物品列表（如诱导目标的物品）。",
-                        "examples": [["minecraft:sugar_cane"]]
+                        "examples": [
+                            [
+                                "minecraft:sugar_cane"
+                            ]
+                        ]
                     },
                     "block": {
                         "type": "string",
                         "description": "与目标相关的方块（如移除方块目标的方块类型）。",
-                        "examples": ["minecraft:turtle_egg"]
+                        "examples": [
+                            "minecraft:turtle_egg"
+                        ]
                     },
                     "speed_modifier": {
                         "type": "number",
                         "description": "移动速度的倍率，影响目标执行时的速度。",
                         "minimum": 0,
                         "default": 1.0,
-                        "examples": [1.0, 0.8]
+                        "examples": [
+                            1.0,
+                            0.8
+                        ]
                     },
                     "vertical_search_range": {
                         "type": "integer",
                         "description": "垂直搜索范围，用于如移除方块目标的搜索高度。",
                         "minimum": 0,
-                        "examples": [3]
+                        "examples": [
+                            3
+                        ]
                     },
                     "target": {
                         "type": "string",
                         "description": "目标实体类型（如攻击或观察的目标）。",
-                        "examples": ["minecraft:player", "minecraft:villager"]
+                        "examples": [
+                            "minecraft:player",
+                            "minecraft:villager"
+                        ]
                     },
                     "look_distance": {
                         "type": "number",
                         "description": "观察距离，实体能看到目标的最大距离。",
                         "minimum": 0,
-                        "examples": [8.0]
+                        "examples": [
+                            8.0
+                        ]
                     },
                     "probability": {
                         "type": "number",
                         "description": "行为触发的概率，范围从 0.0 到 1.0。",
                         "minimum": 0,
                         "maximum": 1,
-                        "examples": [0.02, 0.001]
+                        "examples": [
+                            0.02,
+                            0.001
+                        ]
                     },
                     "following_target_even_if_not_seen": {
                         "type": "boolean",
                         "description": "是否在看不见目标时仍继续追随。",
                         "default": false,
-                        "examples": [false]
+                        "examples": [
+                            true,
+                            false
+                        ]
                     },
                     "only_at_night": {
                         "type": "boolean",
                         "description": "是否仅在夜间执行该目标。",
                         "default": false,
-                        "examples": [true]
+                        "examples": [
+                            true,
+                            false
+                        ]
                     },
                     "distance_to_poi": {
                         "type": "integer",
                         "description": "到兴趣点的最大距离（如村庄导航）。",
                         "minimum": 0,
-                        "examples": [8]
+                        "examples": [
+                            8
+                        ]
                     },
                     "can_deal_with_doors": {
                         "type": "boolean",
                         "description": "是否能与门互动（如打开或破坏门）。",
                         "default": false,
-                        "examples": [true]
+                        "examples": [
+                            true,
+                            false
+                        ]
                     },
                     "alert_others": {
                         "type": "array",
@@ -378,56 +476,92 @@
                             "type": "string"
                         },
                         "description": "受到攻击时通知的其他实体类型。",
-                        "examples": [["minecraft:zombified_piglin"]]
+                        "examples": [
+                            [
+                                "minecraft:zombified_piglin"
+                            ]
+                        ]
                     },
                     "must_see": {
                         "type": "boolean",
                         "description": "是否必须看到目标才能执行行为。",
                         "default": false,
-                        "examples": [true]
+                        "examples": [
+                            true,
+                            false
+                        ]
                     },
                     "must_reach": {
                         "type": "boolean",
                         "description": "是否必须能到达目标位置。",
                         "default": false,
-                        "examples": [false]
+                        "examples": [
+                            true,
+                            false
+                        ]
                     },
                     "random_interval": {
                         "type": "integer",
                         "description": "目标重新评估的随机间隔（以刻为单位）。",
                         "minimum": 0,
-                        "examples": [20]
+                        "examples": [
+                            20
+                        ]
                     },
                     "ignore_baby": {
                         "type": "boolean",
                         "description": "是否忽略幼年版本的目标实体。",
-                        "default": false
+                        "default": false,
+                        "examples": [
+                            true,
+                            false
+                        ]
                     },
                     "ignore_in_water": {
                         "type": "boolean",
                         "description": "是否忽略在水中的目标实体。",
-                        "default": false
+                        "default": false,
+                        "examples": [
+                            true,
+                            false
+                        ]
                     },
                     "door_break_time": {
                         "type": "integer",
                         "description": "破坏门所需的时间（以刻为单位）。",
                         "minimum": 0,
                         "default": 240,
-                        "examples": [240]
+                        "examples": [
+                            240
+                        ]
                     },
                     "valid_difficulties": {
                         "type": "array",
                         "items": {
                             "type": "string",
-                            "enum": ["peaceful", "easy", "normal", "hard"]
+                            "enum": [
+                                "peaceful",
+                                "easy",
+                                "normal",
+                                "hard"
+                            ]
                         },
                         "description": "允许破坏门的游戏难度。",
-                        "examples": [["normal", "hard"]]
+                        "examples": [
+                            [
+                                "normal",
+                                "hard"
+                            ]
+                        ]
                     },
                     "can_scare": {
                         "type": "boolean",
                         "description": "诱导目标是否可能因惊吓而逃跑。",
-                        "default": false
+                        "default": false,
+                        "examples": [
+                            true,
+                            false
+                        ]
                     },
                     "item_tags": {
                         "type": "array",
@@ -435,13 +569,19 @@
                             "type": "string"
                         },
                         "description": "诱导目标的物品标签列表。",
-                        "examples": [["minecraft:flowers"]]
+                        "examples": [
+                            [
+                                "minecraft:flowers"
+                            ]
+                        ]
                     },
                     "stop_distance": {
                         "type": "number",
                         "description": "跟随目标时停止跟随的最大距离。",
                         "minimum": 0,
-                        "examples": [2.0]
+                        "examples": [
+                            2.0
+                        ]
                     },
                     "area_size": {
                         "type": "integer",
@@ -451,24 +591,37 @@
                     "close_door": {
                         "type": "boolean",
                         "description": "打开门后是否关闭门。",
-                        "default": true
+                        "default": true,
+                        "examples": [
+                            true,
+                            false
+                        ]
                     },
                     "damage_type": {
                         "type": "string",
                         "description": "触发恐慌目标的伤害类型。",
-                        "examples": ["minecraft:panic_causes"]
+                        "examples": [
+                            "minecraft:panic_causes"
+                        ]
                     },
                     "interval": {
                         "type": "integer",
                         "description": "行为之间的间隔时间（以刻为单位）。",
                         "minimum": 0,
                         "default": 240,
-                        "examples": [100, 240]
+                        "examples": [
+                            100,
+                            240
+                        ]
                     },
                     "check_no_action_time": {
                         "type": "boolean",
                         "description": "是否根据空闲时间触发漫步行为。",
-                        "default": false
+                        "default": false,
+                        "examples": [
+                            true,
+                            false
+                        ]
                     }
                 },
                 "required": [
@@ -484,18 +637,206 @@
                 "type": "number",
                 "minimum": 0
             },
-            "examples": [
-                {
-                    "minecraft:follow_range": 35,
-                    "minecraft:movement_speed": 0.23,
-                    "minecraft:attack_damage": 3.0,
-                    "minecraft:armor": 2.0,
-                    "minecraft:attack_range": 1.5,
-                    "minecraft:spawn_reinforcements": 0.5,
-                    "minecraft:step_height": 0,
-                    "minecraft:tempt_range": 10
+            "properties": {
+                "minecraft:health": {
+                    "description": "实体的生命值。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1024
+                },
+                "minecraft:movement": {
+                    "description": "实体的移动速度。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1.0
+                },
+                "minecraft:follow_range": {
+                    "description": "实体主动追踪目标的距离。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 2048
+                },
+                "minecraft:attack_damage": {
+                    "description": "实体的攻击伤害。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 2048
+                },
+                "minecraft:knockback_resistance": {
+                    "description": "实体的击退抗性。",
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0
+                },
+                "minecraft:absorption": {
+                    "description": "实体的吸收量。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1024
+                },
+                "minecraft:lava_movement": {
+                    "description": "实体在熔岩中的移动速度。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1.0
+                },
+                "minecraft:underwater_movement": {
+                    "description": "实体在水中的移动速度。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1.0
+                },
+                "minecraft:jump_strength": {
+                    "description": "实体的跳跃强度。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 2.0
+                },
+                "minecraft:fall_damage": {
+                    "description": "实体受到的跌落伤害倍率。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100.0
+                },
+                "minecraft:luck": {
+                    "description": "实体的幸运值。",
+                    "type": "number",
+                    "minimum": -1024,
+                    "maximum": 1024
+                },
+                "minecraft:horse.jump_strength": {
+                    "description": "马的跳跃强度。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 2.0
+                },
+                "minecraft:zombie.spawn_reinforcements": {
+                    "description": "僵尸召唤增援的几率。",
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0
+                },
+                "minecraft:attack_speed": {
+                    "description": "实体的攻击速度。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1024
+                },
+                "minecraft:armor": {
+                    "description": "实体的护甲值。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 30
+                },
+                "minecraft:armor_toughness": {
+                    "description": "实体的护甲韧性。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 20
+                },
+                "minecraft:attack_range": {
+                    "description": "实体的攻击范围。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 64
+                },
+                "minecraft:step_height": {
+                    "description": "实体的步高。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 10
+                },
+                "minecraft:tempt_range": {
+                    "description": "实体被诱导的范围。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 2048
+                },
+                "minecraft:generic.max_absorption": {
+                    "description": "实体的最大吸收量。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1024
+                },
+                "minecraft:generic.burning_time": {
+                    "description": "实体燃烧的时间（以秒为单位）。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1000
+                },
+                "minecraft:generic.explosion_knockback_resistance": {
+                    "description": "实体对爆炸击退的抗性。",
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0
+                },
+                "minecraft:generic.movement_efficiency": {
+                    "description": "实体在不同地形上的移动效率。",
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0
+                },
+                "minecraft:generic.oxygen_bonus": {
+                    "description": "实体在水下呼吸时间的加成。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1000
+                },
+                "minecraft:generic.water_movement_efficiency": {
+                    "description": "实体在水中的移动效率。",
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0
+                },
+                "minecraft:generic.scale": {
+                    "description": "实体的模型缩放比例。",
+                    "type": "number",
+                    "minimum": 0.0625,
+                    "maximum": 16.0
+                },
+                "minecraft:generic.block_interaction_range": {
+                    "description": "实体与方块交互的范围。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 64
+                },
+                "minecraft:generic.entity_interaction_range": {
+                    "description": "实体与其他实体交互的范围。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 64
+                },
+                "minecraft:generic.block_break_speed": {
+                    "description": "实体破坏方块的速度。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1000
+                },
+                "minecraft:generic.mining_speed": {
+                    "description": "实体挖掘方块的速度。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1000
+                },
+                "minecraft:generic.sneaking_speed": {
+                    "description": "实体潜行时的移动速度。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1.0
+                },
+                "minecraft:generic.sprinting_speed": {
+                    "description": "实体冲刺时的移动速度。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1.0
+                },
+                "minecraft:generic.swimming_speed": {
+                    "description": "实体游泳时的移动速度。",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1.0
                 }
-            ]
+            }
         },
         "spawn": {
             "description": "实体的生成规则，控制其在世界中的生成方式和位置。",
@@ -505,37 +846,53 @@
                     "type": "integer",
                     "description": "生成权重，值越高生成概率越大，推荐范围 10-50。",
                     "minimum": 0,
-                    "examples": [20, 40]
+                    "examples": [
+                        20,
+                        40
+                    ]
                 },
                 "min_group_size": {
                     "type": "integer",
                     "description": "单次生成的最小实体数量。",
                     "minimum": 1,
-                    "examples": [2]
+                    "examples": [
+                        2
+                    ]
                 },
                 "max_group_size": {
                     "type": "integer",
                     "description": "单次生成的最大实体数量。",
                     "minimum": 1,
-                    "examples": [4]
+                    "examples": [
+                        4
+                    ]
                 },
                 "found_in_overworld": {
                     "type": "boolean",
                     "description": "是否在主世界生成。",
                     "default": false,
-                    "examples": [true]
+                    "examples": [
+                        true,
+                        false
+                    ]
                 },
                 "found_in_nether": {
                     "type": "boolean",
                     "description": "是否在下界生成。",
                     "default": false,
-                    "examples": [false]
+                    "examples": [
+                        true,
+                        false
+                    ]
                 },
                 "found_in_end": {
                     "type": "boolean",
                     "description": "是否在末地生成。",
                     "default": false,
-                    "examples": [false]
+                    "examples": [
+                        true,
+                        false
+                    ]
                 },
                 "biomes": {
                     "type": "array",
@@ -543,16 +900,29 @@
                         "type": "string"
                     },
                     "description": "实体可生成的特定生物群系列表。",
-                    "examples": [["minecraft:desert"], ["minecraft:snowy_taiga"]]
+                    "examples": [
+                        [
+                            "minecraft:desert"
+                        ],
+                        [
+                            "minecraft:snowy_taiga"
+                        ]
+                    ]
                 },
                 "biomeTags": {
                     "type": "array",
                     "items": {
                         "type": "string"
-
                     },
                     "description": "实体可生成的生物群系标签列表。",
-                    "examples": [["c:desert"], ["c:is_icy"]]
+                    "examples": [
+                        [
+                            "c:desert"
+                        ],
+                        [
+                            "c:is_icy"
+                        ]
+                    ]
                 },
                 "spawn_like": {
                     "type": "array",
@@ -560,7 +930,11 @@
                         "type": "string"
                     },
                     "description": "实体模仿其生成规则的实体类型列表。",
-                    "examples": [["minecraft:zombie"]]
+                    "examples": [
+                        [
+                            "minecraft:zombie"
+                        ]
+                    ]
                 }
             },
             "required": [
@@ -712,8 +1086,12 @@
                 "found_in_overworld": true,
                 "found_in_nether": false,
                 "found_in_end": false,
-                "biomes": ["minecraft:desert"],
-                "biomeTags": ["c:desert"]
+                "biomes": [
+                    "minecraft:desert"
+                ],
+                "biomeTags": [
+                    "c:desert"
+                ]
             }
         }
     ]

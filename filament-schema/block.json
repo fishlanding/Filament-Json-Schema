@@ -9,7 +9,7 @@
     ],
     "properties": {
         "id": {
-            "description": "方块的唯一标识符，格式为 '命名空间:方块名称'",
+            "description": "方块的唯一标识符，格式为 '<namespace>:<blockname>'",
             "type": "string",
             "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
             "examples": [
@@ -54,7 +54,7 @@
                                 ],
                                 "properties": {
                                     "model": {
-                                        "description": "模型路径，格式为 '命名空间:路径/模型'",
+                                        "description": "模型路径，格式为 '<namespace>:path/model'",
                                         "type": "string",
                                         "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
                                         "examples": [
@@ -65,14 +65,31 @@
                                     "x": {
                                         "description": "X轴旋转角度（度），用于模型朝向调整",
                                         "type": "integer",
-                                        "enum": [0, 90, 180, 270],
-                                        "examples": [90]
+                                        "enum": [
+                                            0,
+                                            90,
+                                            180,
+                                            270
+                                        ],
+                                        "examples": [
+                                            90
+                                        ]
                                     },
                                     "y": {
                                         "description": "Y轴旋转角度（度），用于模型朝向调整",
                                         "type": "integer",
-                                        "enum": [0, 90, 180, 270],
-                                        "examples": [0, 90, 180, 270]
+                                        "enum": [
+                                            0,
+                                            90,
+                                            180,
+                                            270
+                                        ],
+                                        "examples": [
+                                            0,
+                                            90,
+                                            180,
+                                            270
+                                        ]
                                     }
                                 }
                             }
@@ -95,7 +112,7 @@
                                     ],
                                     "properties": {
                                         "model": {
-                                            "description": "默认模型路径，格式为 '命名空间:路径/模型'",
+                                            "description": "默认模型路径，格式为 '<namespace>:path/model'",
                                             "type": "string",
                                             "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
                                             "examples": [
@@ -105,14 +122,31 @@
                                         "x": {
                                             "description": "X轴旋转角度（度），用于模型朝向调整",
                                             "type": "integer",
-                                            "enum": [0, 90, 180, 270],
-                                            "examples": [90]
+                                            "enum": [
+                                                0,
+                                                90,
+                                                180,
+                                                270
+                                            ],
+                                            "examples": [
+                                                90
+                                            ]
                                         },
                                         "y": {
                                             "description": "Y轴旋转角度（度），用于模型朝向调整",
                                             "type": "integer",
-                                            "enum": [0, 90, 180, 270],
-                                            "examples": [0, 90, 180, 270]
+                                            "enum": [
+                                                0,
+                                                90,
+                                                180,
+                                                270
+                                            ],
+                                            "examples": [
+                                                0,
+                                                90,
+                                                180,
+                                                270
+                                            ]
                                         }
                                     }
                                 }
@@ -251,6 +285,27 @@
             "description": "方块的附加属性，定义物理和交互行为",
             "type": "object",
             "properties": {
+                "lore": {
+                    "description": "物品描述文本列表，支持 PlaceholderAPI 简单文本格式",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "examples": [
+                            "普通的文本",
+                            "<c:red>传说之物</c>",
+                            "<lang:'mymod.lore.mylore'>",
+                            "<color:#FF3333><b>勇敢的冒险者</b></color> <dark_gray>»</dark_gray> <italic><color:#CCCCCC>欢迎来到新世界！</color></italic>",
+                            "<gradient:#FF0000:#0000FF>彩虹渐变文字</gradient>",
+                            "<hover:show_text:'<red>点击查看详情！</red>'><click:open_url:'https://example.com'>点击我</click></hover>",
+                            "<font:uniform><underline>特殊字体效果</underline></font>",
+                            "<insert:'/gamemode creative'>点击插入命令</insert>",
+                            "<keybind:key.jump> 跳转键提示</keybind>",
+                            "<clear:color><c:yellow>清除颜色后的文字</c></clear>",
+                            "<rainbow>简单的彩虹效果</rainbow>",
+                            "<reset><c:green>重置格式后的新文本</c>"
+                        ]
+                    }
+                },
                 "blockBase": {
                     "description": "基础方块，用于声音和地图上的方块颜色，默认为 'minecraft:stone'",
                     "type": "string",
@@ -400,11 +455,7 @@
                 "solid": {
                     "description": "方块是否会被水冲走，默认为 true",
                     "type": "boolean",
-                    "default": true,
-                    "examples": [
-                        true,
-                        false
-                    ]
+                    "default": true
                 },
                 "pushReaction": {
                     "description": "方块被活塞推动时的反应，默认为 'normal'",
@@ -511,7 +562,10 @@
                 ]
             },
             "examples": [
-                ["minecraft:dirt", "minecraft:climbable"]
+                [
+                    "minecraft:dirt",
+                    "minecraft:climbable"
+                ]
             ]
         },
         "itemTags": {
@@ -525,11 +579,13 @@
                 ]
             },
             "examples": [
-                ["minecraft:enchantable/durability"]
+                [
+                    "minecraft:enchantable/durability"
+                ]
             ]
         },
         "group": {
-            "description": "方块物品所属的物品组，参见物品组文档",
+            "description": "方块物品所属的物品组",
             "type": "string",
             "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
             "examples": [
@@ -561,14 +617,739 @@
             ]
         },
         "behaviour": {
-            "description": "方块的行为配置，例如水淹行为",
+            "description": "方块的行为配置，用于定义方块的独特属性和交互方式，例如水淹、红石、作物生长等",
             "type": "object",
             "additionalProperties": true,
-            "examples": [
-                {
-                    "simple_waterloggable": {}
+            "properties": {
+                "axis": {
+                    "description": "为方块提供类似于木头或柱子的轴向属性（axis）和放置处理，支持 x、y、z 轴",
+                    "type": "object",
+                    "properties": {}
+                },
+                "count": {
+                    "description": "为方块提供计数属性（count），类似于海龟蛋或蜡烛，允许堆叠多个方块",
+                    "type": "object",
+                    "properties": {}
+                },
+                "facing": {
+                    "description": "为方块提供朝向属性（facing），支持所有方向（北、南、东、西、上、下）并处理放置逻辑",
+                    "type": "object",
+                    "properties": {}
+                },
+                "horizontal_facing": {
+                    "description": "为方块提供水平朝向属性（horizontal_facing），类似于熔炉或把手，仅支持北、南、东、西",
+                    "type": "object",
+                    "properties": {}
+                },
+                "crop": {
+                    "description": "使方块表现为作物，支持生长、骨粉加速、最低光照要求等行为，可配置生长加成",
+                    "type": "object",
+                    "properties": {
+                        "maxAge": {
+                            "description": "作物的最大生长阶段（0 到 maxAge-1）",
+                            "type": "integer",
+                            "default": 4
+                        },
+                        "minLightLevel": {
+                            "description": "作物生存所需的最低光照水平",
+                            "type": "integer",
+                            "default": 8
+                        },
+                        "bonusRadius": {
+                            "description": "检查生长加成方块的半径",
+                            "type": "integer",
+                            "default": 1
+                        },
+                        "bonusBlock": {
+                            "description": "用于生长加成的方块，越多生长越快",
+                            "type": "string",
+                            "default": "minecraft:farmland"
+                        },
+                        "villagerInteraction": {
+                            "description": "允许农民村民采摘和种植该作物",
+                            "type": "boolean",
+                            "default": true,
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        },
+                        "beeInteraction": {
+                            "description": "允许蜜蜂为作物授粉以加速生长",
+                            "type": "boolean",
+                            "default": true,
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        }
+                    }
+                },
+                "sapling": {
+                    "description": "使方块表现为树苗，支持随机生长和骨粉处理，可配置树木生成",
+                    "type": "object",
+                    "properties": {
+                        "stage": {
+                            "description": "树苗的生长阶段（0 到 1）",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "tree": {
+                            "description": "普通树木的配置放置标识符",
+                            "type": "string"
+                        },
+                        "minLightLevel": {
+                            "description": "树苗生存所需的最低光照水平",
+                            "type": "integer",
+                            "default": 9
+                        },
+                        "secondaryChance": {
+                            "description": "次级树或花的生成概率（0 到 1）",
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "default": 0
+                        },
+                        "randomTickGrowthChance": {
+                            "description": "随机刻生长概率",
+                            "type": "number",
+                            "default": 0.15
+                        },
+                        "bonemealGrowthChance": {
+                            "description": "骨粉触发生长概率",
+                            "type": "number",
+                            "default": 0.45
+                        },
+                        "megaTree": {
+                            "description": "2x2 树苗的大型树配置放置标识符",
+                            "type": "string"
+                        },
+                        "secondaryMegaTree": {
+                            "description": "基于 secondaryChance 的大型树替代配置",
+                            "type": "string"
+                        },
+                        "secondaryTree": {
+                            "description": "基于 secondaryChance 的普通树替代配置",
+                            "type": "string"
+                        },
+                        "flowers": {
+                            "description": "附近花的配置放置标识符",
+                            "type": "string"
+                        },
+                        "secondaryFlowers": {
+                            "description": "基于 secondaryChance 的花替代配置",
+                            "type": "string"
+                        }
+                    }
+                },
+                "can_survive": {
+                    "description": "检查方块下方支撑方块，若无支撑则方块断裂，适用于植物、作物等",
+                    "type": "object",
+                    "properties": {
+                        "blocks": {
+                            "description": "方块可生存的支撑方块列表",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "tags": {
+                            "description": "方块可生存的支撑方块标签列表",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "powersource": {
+                    "description": "将方块定义为红石电源，可配置红石信号强度",
+                    "type": "object",
+                    "properties": {
+                        "value": {
+                            "description": "方块发出的红石信号强度，可映射到方块状态",
+                            "type": [
+                                "integer",
+                                "object"
+                            ],
+                            "default": 15
+                        }
+                    }
+                },
+                "repeater": {
+                    "description": "将方块定义为红石中继器，支持配置延迟和信号损失",
+                    "type": "object",
+                    "properties": {
+                        "delay": {
+                            "description": "红石信号传输延迟（以刻为单位）",
+                            "type": "integer",
+                            "default": 0
+                        },
+                        "loss": {
+                            "description": "红石信号传输中的信号损失",
+                            "type": "integer",
+                            "default": 0
+                        }
+                    }
+                },
+                "powerlevel": {
+                    "description": "为方块提供红石信号级别（powerlevel）状态，根据输入信号变化",
+                    "type": "object",
+                    "properties": {
+                        "max": {
+                            "description": "此方块可以显示的最大红石信号级别",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 15
+                        }
+                    }
+                },
+                "strippable": {
+                    "description": "将方块定义为可剥离，使用斧头交互时替换为另一方块",
+                    "type": "object",
+                    "properties": {
+                        "replacement": {
+                            "description": "剥离后替换的方块标识符",
+                            "type": "string"
+                        },
+                        "lootTable": {
+                            "description": "剥离时使用的战利品表标识符",
+                            "type": "string"
+                        }
+                    }
+                },
+                "slab": {
+                    "description": "将方块定义为台阶，支持顶部、底部、双层放置及水淹",
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "description": "台阶类型：顶部、底部或双层",
+                            "type": "string",
+                            "enum": [
+                                "top",
+                                "bottom",
+                                "double"
+                            ]
+                        },
+                        "waterlogged": {
+                            "description": "是否被水淹没",
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "trapdoor": {
+                    "description": "将方块定义为活板门，支持朝向、开合、水淹等属性",
+                    "type": "object",
+                    "properties": {
+                        "facing": {
+                            "description": "活板门朝向：北、南、东、西、上、下",
+                            "type": "string",
+                            "enum": [
+                                "north",
+                                "south",
+                                "east",
+                                "west",
+                                "up",
+                                "down"
+                            ]
+                        },
+                        "half": {
+                            "description": "活板门位置：顶部或底部",
+                            "type": "string",
+                            "enum": [
+                                "top",
+                                "bottom"
+                            ]
+                        },
+                        "open": {
+                            "description": "活板门是否打开",
+                            "type": "boolean"
+                        },
+                        "waterlogged": {
+                            "description": "是否被水淹没",
+                            "type": "boolean"
+                        },
+                        "canOpenByWindCharge": {
+                            "description": "是否能被风力充能打开",
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "canOpenByHand": {
+                            "description": "是否能用手打开",
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "openSound": {
+                            "description": "打开活板门时的音效",
+                            "type": "string",
+                            "default": "minecraft:block.wooden_trapdoor.open"
+                        },
+                        "closeSound": {
+                            "description": "关闭活板门时的音效",
+                            "type": "string",
+                            "default": "minecraft:block.wooden_trapdoor.close"
+                        }
+                    }
+                },
+                "door": {
+                    "description": "将方块定义为门，高度为2格，支持铰链、开合等属性",
+                    "type": "object",
+                    "properties": {
+                        "facing": {
+                            "description": "门朝向：北、南、东、西",
+                            "type": "string",
+                            "enum": [
+                                "north",
+                                "south",
+                                "east",
+                                "west"
+                            ]
+                        },
+                        "half": {
+                            "description": "门的位置：上半部分或下半部分",
+                            "type": "string",
+                            "enum": [
+                                "upper",
+                                "lower"
+                            ]
+                        },
+                        "open": {
+                            "description": "门是否打开",
+                            "type": "boolean"
+                        },
+                        "hinge": {
+                            "description": "门的铰链位置：左或右",
+                            "type": "string",
+                            "enum": [
+                                "left",
+                                "right"
+                            ]
+                        },
+                        "canOpenByWindCharge": {
+                            "description": "是否能被风力充能打开",
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "canOpenByHand": {
+                            "description": "是否能用手打开",
+                            "type": "boolean",
+                            "examples": [
+                                true,
+                                false
+                            ],
+                            "default": true
+                        },
+                        "openSound": {
+                            "description": "开门时的音效",
+                            "type": "string",
+                            "default": "minecraft:block.wooden_door.open"
+                        },
+                        "closeSound": {
+                            "description": "关门时的音效",
+                            "type": "string",
+                            "default": "minecraft:block.wooden_door.close"
+                        }
+                    }
+                },
+                "simple_waterloggable": {
+                    "description": "使方块支持简单的水淹行为，自动处理水淹状态",
+                    "type": "object",
+                    "properties": {
+                        "waterlogged": {
+                            "description": "是否被水淹没",
+                            "type": "boolean",
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        }
+                    }
+                },
+                "drop_xp": {
+                    "description": "使方块在挖掘时（无精准采集）掉落经验值，可映射到方块状态",
+                    "type": "object",
+                    "properties": {
+                        "min": {
+                            "description": "掉落的最小经验值，可映射到方块状态",
+                            "type": [
+                                "integer",
+                                "object"
+                            ]
+                        },
+                        "max": {
+                            "description": "掉落的最大经验值，可映射到方块状态",
+                            "type": [
+                                "integer",
+                                "object"
+                            ]
+                        }
+                    }
+                },
+                "block_interact_execute": {
+                    "description": "在方块交互时执行命令（控制台或玩家身份）",
+                    "type": "object",
+                    "properties": {
+                        "consumes": {
+                            "description": "执行命令后是否破坏方块",
+                            "type": "boolean",
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        },
+                        "dropBlock": {
+                            "description": "破坏方块时是否掉落物品",
+                            "type": "boolean",
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        },
+                        "command": {
+                            "description": "要执行的命令字符串",
+                            "type": "string",
+                            "default": ""
+                        },
+                        "commands": {
+                            "description": "要执行的命令列表",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "default": []
+                        },
+                        "atBlock": {
+                            "description": "命令是否在方块位置执行",
+                            "type": "boolean",
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        },
+                        "sound": {
+                            "description": "执行命令时的音效",
+                            "type": "string",
+                            "default": ""
+                        }
+                    }
+                },
+                "block_attack_execute": {
+                    "description": "在方块被攻击时执行命令（控制台或玩家身份）",
+                    "type": "object",
+                    "properties": {
+                        "consumes": {
+                            "description": "执行命令后是否破坏方块",
+                            "type": "boolean",
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        },
+                        "dropBlock": {
+                            "description": "破坏方块时是否掉落物品",
+                            "type": "boolean",
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        },
+                        "command": {
+                            "description": "要执行的命令字符串",
+                            "type": "string",
+                            "default": ""
+                        },
+                        "commands": {
+                            "description": "要执行的命令列表",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "default": []
+                        },
+                        "atBlock": {
+                            "description": "命令是否在方块位置执行",
+                            "type": "boolean"
+                        },
+                        "sound": {
+                            "description": "执行命令时的音效",
+                            "type": "string",
+                            "default": ""
+                        }
+                    }
+                },
+                "oxidizable": {
+                    "description": "使方块具有氧化行为，类似铜方块，随时间替换为其他方块",
+                    "type": "object",
+                    "properties": {
+                        "replacement": {
+                            "description": "氧化后替换的方块标识符",
+                            "type": "string"
+                        },
+                        "weatherState": {
+                            "description": "当前的氧化状态",
+                            "type": "string",
+                            "enum": [
+                                "unaffected",
+                                "exposed",
+                                "weathered",
+                                "oxidized"
+                            ],
+                            "default": "unaffected"
+                        }
+                    }
+                },
+                "budding": {
+                    "description": "使方块具有生长其他方块的行为，类似紫水晶母岩，可配置生长方向和方块",
+                    "type": "object",
+                    "properties": {
+                        "chance": {
+                            "description": "生长其他方块的概率（0-100%）",
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 20
+                        },
+                        "sides": {
+                            "description": "可生长的方向列表",
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "north",
+                                    "south",
+                                    "east",
+                                    "west",
+                                    "up",
+                                    "down"
+                                ]
+                            },
+                            "default": [
+                                "north",
+                                "south",
+                                "east",
+                                "west",
+                                "up",
+                                "down"
+                            ]
+                        },
+                        "grows": {
+                            "description": "生长阶段的方块标识符列表",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "grass_spread": {
+                    "description": "使方块像草或菌丝一样扩散，基于随机刻",
+                    "type": "object",
+                    "properties": {
+                        "decayBlockState": {
+                            "description": "扩散其他方块的概率（0-100%）",
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 20
+                        },
+                        "propagatesToBlocks": {
+                            "description": "可扩散到的方块列表",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "default": [
+                                "minecraft:dirt"
+                            ]
+                        },
+                        "propagatesToBlockTags": {
+                            "description": "可扩散到的方块标签列表",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "default": []
+                        }
+                    }
+                },
+                "falling_block": {
+                    "description": "使方块受重力影响，像沙子或铁砧一样下落",
+                    "type": "object",
+                    "properties": {
+                        "delayAfterPlace": {
+                            "description": "放置后下落的延迟（以刻为单位）",
+                            "type": "integer",
+                            "default": 2
+                        },
+                        "heavy": {
+                            "description": "是否造成铁砧类似的伤害",
+                            "type": "boolean",
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        },
+                        "damagePerDistance": {
+                            "description": "每下落一格累积的伤害",
+                            "type": "number"
+                        },
+                        "maxDamage": {
+                            "description": "下落方块的最大伤害",
+                            "type": "number"
+                        },
+                        "disableDrops": {
+                            "description": "下落后是否阻止方块放置",
+                            "type": "boolean",
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        },
+                        "silent": {
+                            "description": "下落或破坏时是否播放音效",
+                            "type": "boolean",
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        },
+                        "landSound": {
+                            "description": "方块落地时的音效",
+                            "type": "string"
+                        },
+                        "breakSound": {
+                            "description": "方块破坏时的音效",
+                            "type": "string"
+                        },
+                        "canBeDamaged": {
+                            "description": "是否替换为损坏后的方块",
+                            "type": "boolean",
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        },
+                        "damagedBlock": {
+                            "description": "损坏后替换的方块",
+                            "type": "string"
+                        },
+                        "baseBreakChance": {
+                            "description": "方块自行损坏的基准概率",
+                            "type": "number"
+                        },
+                        "breakChancePerDistance": {
+                            "description": "每下落一格增加的损坏概率",
+                            "type": "number"
+                        }
+                    }
+                },
+                "tnt": {
+                    "description": "使方块可被打火石或红石点燃，生成 TNT 实体",
+                    "type": "object",
+                    "properties": {
+                        "unstable": {
+                            "description": "玩家尝试破坏时是否爆炸",
+                            "type": "boolean",
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        },
+                        "explosionPower": {
+                            "description": "爆炸威力",
+                            "type": "number",
+                            "default": 4.0
+                        },
+                        "fuseTime": {
+                            "description": "引信时间（点燃到爆炸的延迟）",
+                            "type": "integer",
+                            "default": 80
+                        },
+                        "primeSound": {
+                            "description": "点燃时的音效",
+                            "type": "string",
+                            "default": "minecraft:entity.tnt.primed"
+                        }
+                    }
+                },
+                "furnace": {
+                    "description": "使方块具有熔炉行为，包含菜单界面，需配合水平朝向行为",
+                    "type": "object",
+                    "properties": {
+                        "lit": {
+                            "description": "",
+                            "type": "boolean",
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        }
+                    }
+                },
+                "hopper": {
+                    "description": "使方块具有漏斗行为，包含菜单界面，支持物品过滤和传输",
+                    "type": "object",
+                    "properties": {
+                        "facing": {
+                            "description": "漏斗朝向：北、南、东、西、下",
+                            "type": "string",
+                            "enum": [
+                                "north",
+                                "south",
+                                "east",
+                                "west",
+                                "down"
+                            ]
+                        },
+                        "enabled": {
+                            "description": "漏斗是否启用",
+                            "type": "boolean",
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        },
+                        "filterItems": {
+                            "description": "允许传输的物品或物品标签列表",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "default": []
+                        },
+                        "pickupItemEntities": {
+                            "description": "是否拾取物品实体",
+                            "type": "boolean",
+                            "default": true,
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        },
+                        "takeFromContainer": {
+                            "description": "是否从上方容器中取物品",
+                            "type": "boolean",
+                            "default": true,
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        },
+                        "cooldownTime": {
+                            "description": "传输物品的冷却时间（tick）",
+                            "type": "integer",
+                            "default": 8
+                        }
+                    }
                 }
-            ]
+            }
         }
     },
     "examples": [
@@ -596,8 +1377,12 @@
         {
             "id": "mynamespace:pebbles",
             "vanillaItem": "minecraft:paper",
-            "itemTags": ["minecraft:enchantable/durability"],
-            "blockTags": ["minecraft:dirt"],
+            "itemTags": [
+                "minecraft:enchantable/durability"
+            ],
+            "blockTags": [
+                "minecraft:dirt"
+            ],
             "blockResource": {
                 "models": {
                     "count=1": "mynamespace:custom/block/stone/pebbles_1",
@@ -620,7 +1405,9 @@
         },
         {
             "id": "mynamespace:half_slab",
-            "blockTags": ["minecraft:climbable"],
+            "blockTags": [
+                "minecraft:climbable"
+            ],
             "blockResource": {
                 "models": {
                     "waterlogged=false": "minecraft:custom/block/dirt/dirt_slab",

@@ -9,7 +9,7 @@
     ],
     "properties": {
         "id": {
-            "description": "装饰的唯一标识符，格式为 '命名空间:装饰名称'，仅允许小写字母、数字、下划线和斜杠。",
+            "description": "装饰的唯一标识符，格式为 '<namespace>:<decorationname>'，仅允许小写字母、数字、下划线和斜杠。",
             "type": "string",
             "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
             "examples": [
@@ -31,7 +31,8 @@
             "type": "boolean",
             "default": false,
             "examples": [
-                true
+                true,
+                false
             ]
         },
         "block": {
@@ -83,7 +84,7 @@
             ]
         },
         "group": {
-            "description": "装饰所属的物品组，格式为 '命名空间:组名称'。",
+            "description": "装饰所属的物品组，格式为 '<namespace>:<groupname>'。",
             "type": "string",
             "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
             "examples": [
@@ -105,7 +106,7 @@
                     ],
                     "properties": {
                         "default": {
-                            "description": "默认模型路径，格式为 '命名空间:路径/模型'。",
+                            "description": "默认模型路径，格式为 '<namespace>:path/model'。",
                             "type": "string",
                             "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
                             "examples": [
@@ -174,7 +175,8 @@
                     "type": "boolean",
                     "default": false,
                     "examples": [
-                        true
+                        true,
+                        false
                     ]
                 },
                 "rotateSmooth": {
@@ -182,7 +184,8 @@
                     "type": "boolean",
                     "default": false,
                     "examples": [
-                        true
+                        true,
+                        false
                     ]
                 },
                 "placement": {
@@ -192,17 +195,29 @@
                         "floor": {
                             "description": "是否允许放置在地面。",
                             "type": "boolean",
-                            "default": true
+                            "default": true,
+                            "examples": [
+                                true,
+                                false
+                            ]
                         },
                         "wall": {
                             "description": "是否允许放置在墙面。",
                             "type": "boolean",
-                            "default": false
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
                         },
                         "ceiling": {
                             "description": "是否允许放置在天花板。",
                             "type": "boolean",
-                            "default": false
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
                         }
                     },
                     "default": {
@@ -214,17 +229,29 @@
                 "glow": {
                     "description": "是否忽略环境光照，始终以光照等级 15 显示。",
                     "type": "boolean",
-                    "default": false
+                    "default": false,
+                    "examples": [
+                        true,
+                        false
+                    ]
                 },
                 "waterloggable": {
                     "description": "装饰的方块是否可被水淹没。",
                     "type": "boolean",
-                    "default": true
+                    "default": true,
+                    "examples": [
+                        true,
+                        false
+                    ]
                 },
                 "solid": {
                     "description": "装饰是否为固体（若为 false，可被水冲走）。",
                     "type": "boolean",
-                    "default": true
+                    "default": true,
+                    "examples": [
+                        true,
+                        false
+                    ]
                 },
                 "display": {
                     "description": "物品展示实体的显示模式。",
@@ -251,12 +278,20 @@
                 "useItemParticles": {
                     "description": "是否使用物品粒子效果，若为 false 则使用 blockBase 的粒子。",
                     "type": "boolean",
-                    "default": true
+                    "default": true,
+                    "examples": [
+                        true,
+                        false
+                    ]
                 },
                 "showBreakParticles": {
                     "description": "是否显示破坏粒子效果。",
                     "type": "boolean",
-                    "default": true
+                    "default": true,
+                    "examples": [
+                        true,
+                        false
+                    ]
                 }
             }
         },
@@ -300,7 +335,7 @@
                     "type": "object",
                     "properties": {
                         "model": {
-                            "description": "动画模型的资源路径，格式为 '命名空间:模型名称'。",
+                            "description": "动画模型的资源路径，格式为 '<namespace>:<modelname>'。",
                             "type": "string",
                             "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
                             "examples": [
@@ -342,12 +377,20 @@
                         "purge": {
                             "description": "玩家关闭容器时是否清空内容。",
                             "type": "boolean",
-                            "default": false
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
                         },
                         "canPickup": {
                             "description": "容器是否可被拾取。",
                             "type": "boolean",
-                            "default": true
+                            "default": true,
+                            "examples": [
+                                true,
+                                false
+                            ]
                         },
                         "openAnimation": {
                             "description": "打开容器时播放的动画名称。",
@@ -427,12 +470,20 @@
                         "consumeKey": {
                             "description": "解锁时是否消耗钥匙。",
                             "type": "boolean",
-                            "default": false
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
                         },
                         "discard": {
                             "description": "解锁后是否销毁装饰。",
                             "type": "boolean",
-                            "default": false
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
                         },
                         "unlockAnimation": {
                             "description": "解锁时播放的动画名称。",
@@ -451,7 +502,11 @@
                         "atBlock": {
                             "description": "命令是否在方块位置执行。",
                             "type": "boolean",
-                            "default": false
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
                         }
                     }
                 },
@@ -580,7 +635,7 @@
                             ]
                         },
                         "model": {
-                            "description": "装饰的动画模型路径，格式为 '命名空间:模型名称'。",
+                            "description": "装饰的动画模型路径，格式为 '<namespace>:<modelname>'。",
                             "type": "string",
                             "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
                             "examples": [

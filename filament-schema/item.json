@@ -9,7 +9,7 @@
     ],
     "properties": {
         "id": {
-            "description": "物品的唯一标识符，格式为 '命名空间:物品名称'",
+            "description": "物品的唯一标识符，格式为 '<namespace>:<itemname>'",
             "type": "string",
             "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
             "examples": [
@@ -19,7 +19,7 @@
         "vanillaItem": {
             "description": "用作基础的原版 Minecraft 物品，仅继承客户端外观",
             "type": "string",
-            "pattern": "^minecraft:[a-z_]+$",
+            "pattern": "^[a-z0-9_]+:[a-z_]+$",
             "examples": [
                 "minecraft:paper",
                 "minecraft:bow",
@@ -46,7 +46,7 @@
                     ],
                     "properties": {
                         "default": {
-                            "description": "默认模型路径，格式为 '命名空间:路径/模型'",
+                            "description": "默认模型路径，格式为 '<namespace>:path/model'",
                             "type": "string",
                             "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
                             "examples": [
@@ -175,14 +175,27 @@
                         "type": "string",
                         "examples": [
                             "<c:red>传说之物</c>",
-                            "<lang:'mymod.lore.mylore'>"
+                            "<lang:'mymod.lore.mylore'>",
+                            "<color:#FF3333><b>勇敢的冒险者</b></color> <dark_gray>»</dark_gray> <italic><color:#CCCCCC>欢迎来到新世界！</color></italic>",
+                            "<gradient:#FF0000:#0000FF>彩虹渐变文字</gradient>",
+                            "<hover:show_text:'<red>点击查看详情！</red>'><click:open_url:'https://example.com'>点击我</click></hover>",
+                            "<font:uniform><underline>特殊字体效果</underline></font>",
+                            "<insert:'/gamemode creative'>点击插入命令</insert>",
+                            "<keybind:key.jump> 跳转键提示</keybind>",
+                            "<clear:color><c:yellow>清除颜色后的文字</c></clear>",
+                            "<rainbow>简单的彩虹效果</rainbow>",
+                            "<reset><c:green>重置格式后的新文本</c>"
                         ]
                     }
                 },
                 "fireResistant": {
                     "description": "物品是否防火",
                     "type": "boolean",
-                    "default": false
+                    "default": false,
+                    "examples": [
+                        true,
+                        false
+                    ]
                 }
             }
         },
@@ -227,7 +240,11 @@
                         "trim": {
                             "description": "是否使用盔甲纹饰渲染（需原版盔甲物品）",
                             "type": "boolean",
-                            "default": false
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
                         }
                     }
                 },
@@ -244,7 +261,11 @@
                         "villagerInteraction": {
                             "description": "是否允许农民村民堆肥此物品",
                             "type": "boolean",
-                            "default": true
+                            "default": true,
+                            "examples": [
+                                true,
+                                false
+                            ]
                         }
                     }
                 },
@@ -309,7 +330,11 @@
                         "consumes": {
                             "description": "执行命令后是否消耗物品",
                             "type": "boolean",
-                            "default": false
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
                         },
                         "command": {
                             "description": "要执行的单个命令",
@@ -326,6 +351,15 @@
                             "description": "执行时播放的声音",
                             "type": "string",
                             "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                        },
+                        "onEntityAttack": {
+                            "description": "是否仅在实体受到攻击时执行",
+                            "type": "boolean",
+                            "default": true,
+                            "examples": [
+                                true,
+                                false
+                            ]
                         }
                     }
                 },
@@ -336,7 +370,11 @@
                         "consumes": {
                             "description": "执行命令后是否消耗物品",
                             "type": "boolean",
-                            "default": false
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
                         },
                         "command": {
                             "description": "要执行的单个命令",
@@ -357,7 +395,11 @@
                         "onEntityAttack": {
                             "description": "是否仅在攻击实体时执行命令，否则也在挥动时执行",
                             "type": "boolean",
-                            "default": true
+                            "default": true,
+                            "examples": [
+                                true,
+                                false
+                            ]
                         }
                     }
                 },
@@ -378,17 +420,29 @@
                         "canAlwaysEat": {
                             "description": "是否可以在饥饿条满时食用",
                             "type": "boolean",
-                            "default": false
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
                         },
                         "fastfood": {
                             "description": "是否为快餐（食用速度更快）",
                             "type": "boolean",
-                            "default": false
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
                         },
                         "meat": {
                             "description": "是否为肉类食物",
                             "type": "boolean",
-                            "default": false
+                            "default": false,
+                            "examples": [
+                                true,
+                                false
+                            ]
                         }
                     }
                 },
@@ -427,7 +481,7 @@
                     }
                 },
                 "shovel": {
-                    "description": "定义铲子行为，可将方块变为路径，消耗1点耐久",
+                    "description": "定义锹行为，可将方块变为路径，消耗1点耐久",
                     "type": "object",
                     "properties": {
                         "sound": {
@@ -473,7 +527,7 @@
                     }
                 },
                 "stripper": {
-                    "description": "定义剥皮行为，可剥去原木或刮除铜块，消耗1点耐久",
+                    "description": "定义去皮行为，可剥去原木或刮除铜块，消耗1点耐久",
                     "type": "object",
                     "properties": {
                         "sound": {
@@ -496,7 +550,11 @@
                             "type": "array",
                             "items": {
                                 "type": "string",
-                                "pattern": "^minecraft:[a-z_]+$"
+                                "pattern": "^[a-z0-9_]+:[a-z_]+$",
+                                "examples": [
+                                    "minecraft:silverfish",
+                                    "minecraft:spider"
+                                ]
                             }
                         },
                         "requiredEffects": {
@@ -504,7 +562,10 @@
                             "type": "array",
                             "items": {
                                 "type": "string",
-                                "pattern": "^minecraft:[a-z_]+$"
+                                "pattern": "^[a-z0-9_]+:[a-z_]+$",
+                                "examples": [
+                                    "minecraft:weakness"
+                                ]
                             }
                         },
                         "chance": {
@@ -546,7 +607,7 @@
                             "type": "array",
                             "items": {
                                 "type": "string",
-                                "pattern": "^minecraft:[a-z_]+$"
+                                "pattern": "^[a-z0-9_]+:[a-z_]+$"
                             },
                             "default": [
                                 "minecraft:arrow",
@@ -558,7 +619,7 @@
                             "type": "array",
                             "items": {
                                 "type": "string",
-                                "pattern": "^minecraft:[a-z_]+$"
+                                "pattern": "^[a-z0-9_]+:[a-z_]+$"
                             },
                             "default": [
                                 "minecraft:arrow",
@@ -588,7 +649,7 @@
                             "type": "array",
                             "items": {
                                 "type": "string",
-                                "pattern": "^minecraft:[a-z_]+$"
+                                "pattern": "^[a-z0-9_]+:[a-z_]+$"
                             },
                             "default": [
                                 "minecraft:arrow",
@@ -600,7 +661,7 @@
                             "type": "array",
                             "items": {
                                 "type": "string",
-                                "pattern": "^minecraft:[a-z_]+$"
+                                "pattern": "^[a-z0-9_]+:[a-z_]+$"
                             },
                             "default": [
                                 "minecraft:arrow",
@@ -634,70 +695,6 @@
                         }
                     }
                 },
-                "shoot": {
-                    "description": "定义射击行为（已废弃，推荐使用 bow、crossbow 或 trident）",
-                    "type": "object",
-                    "properties": {
-                        "consumes": {
-                            "description": "射击是否消耗物品",
-                            "type": "boolean",
-                            "default": false
-                        },
-                        "baseDamage": {
-                            "description": "投射物基础伤害",
-                            "type": "number",
-                            "default": 2.0
-                        },
-                        "speed": {
-                            "description": "投射物发射速度",
-                            "type": "number",
-                            "default": 1.0
-                        },
-                        "projectile": {
-                            "description": "投射物物品的标识符",
-                            "type": "string",
-                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$"
-                        },
-                        "sound": {
-                            "description": "射击时播放的声音",
-                            "type": "string",
-                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$"
-                        },
-                        "translation": {
-                            "description": "投射物平移偏移（X, Y, Z）",
-                            "type": "array",
-                            "items": {
-                                "type": "number"
-                            },
-                            "minItems": 3,
-                            "maxItems": 3,
-                            "default": [
-                                0,
-                                0,
-                                0
-                            ]
-                        },
-                        "rotation": {
-                            "description": "投射物旋转角度（X, Y, Z）",
-                            "type": "array",
-                            "items": {
-                                "type": "number"
-                            },
-                            "minItems": 3,
-                            "maxItems": 3,
-                            "default": [
-                                0,
-                                90,
-                                0
-                            ]
-                        },
-                        "scale": {
-                            "description": "投射物缩放比例",
-                            "type": "number",
-                            "default": 0.6
-                        }
-                    }
-                },
                 "shield": {
                     "description": "定义盾牌行为",
                     "type": "object",
@@ -714,7 +711,7 @@
                     "properties": {}
                 },
                 "mace": {
-                    "description": "定义狼牙棒行为",
+                    "description": "定义重锤行为",
                     "type": "object",
                     "properties": {
                         "damageMultiplier": {
@@ -725,7 +722,7 @@
                     }
                 },
                 "enchantable": {
-                    "description": "定义可附魔行为（1.21.2 回溯，仅限 1.21.1）",
+                    "description": "定义可附魔行为（1.21.2 反向移植，仅限 1.21.1）",
                     "type": "object",
                     "properties": {
                         "value": {
@@ -736,7 +733,7 @@
                     }
                 },
                 "repairable": {
-                    "description": "定义可修复行为（1.21.2 回溯，仅限 1.21.1）",
+                    "description": "定义可修复行为（1.21.2 反向移植，仅限 1.21.1）",
                     "type": "object",
                     "properties": {
                         "items": {
