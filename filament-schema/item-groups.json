@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "物品组配置",
+    "description": "用于定义 Filament 数据包中物品组的 JSON 架构，支持物品、方块和装饰品的组配置。",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "required": [
+            "id",
+            "item"
+        ],
+        "properties": {
+            "id": {
+                "type": "string",
+                "description": "物品组的唯一标识符，用于在物品、方块或装饰品配置中引用。格式为 '命名空间:组名'，同时用作翻译键（如 '命名空间.itemGroup.组名'）。",
+                "pattern": "^[a-z0-9_.-]+:[a-z0-9_.-]+$"
+            },
+            "item": {
+                "type": "string",
+                "description": "用作创意模式标签图标的物品 ID，格式为 '命名空间:物品名'。",
+                "pattern": "^[a-z0-9_.-]+:[a-z0-9_.-]+$"
+            },
+            "literal": {
+                "type": "string",
+                "description": "物品组的显示名称，支持 Placeholder API 的基本文本格式化。未提供时，使用基于 id 的翻译键（如 '命名空间.itemGroup.组名'）。"
+            }
+        },
+        "additionalProperties": false
+    }
+}

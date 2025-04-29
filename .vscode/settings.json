@@ -1,0 +1,34 @@
+{
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "data/*/filament/item/**/*.json"
+            ],
+            "url": "./filament-schema/item.json"
+        },
+        {
+            "fileMatch": [
+                "data/*/filament/block/**/*.json"
+            ],
+            "url": "./filament-schema/block.json"
+        },
+        {
+            "fileMatch": [
+                "data/*/filament/decoration/**/*.json"
+            ], 
+            "url": "./filament-schema/decoration.json"
+        },
+        {
+            "fileMatch": [
+                "data/*/filament/entity/**/*.json"
+            ],
+            "url": "./filament-schema/entity.json"
+        },
+        {
+            "fileMatch": [
+                "data/*/filament/item-groups.json"
+            ],
+            "url": "./filament-schema/item-groups.json"
+        }
+    ]
+}

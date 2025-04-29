@@ -1,0 +1,769 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "自定义装饰配置",
+    "description": "用于定义 Filament 数据包中自定义装饰的 JSON 架构，定义装饰的外观、行为和属性等配置。",
+    "type": "object",
+    "required": [
+        "id",
+        "itemResource"
+    ],
+    "properties": {
+        "id": {
+            "description": "装饰的唯一标识符，格式为 '命名空间:装饰名称'，仅允许小写字母、数字、下划线和斜杠。",
+            "type": "string",
+            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
+            "examples": [
+                "mynamespace:clown_horn",
+                "mynamespace:beach_umbrella_top"
+            ]
+        },
+        "vanillaItem": {
+            "description": "用作装饰基础的原版 Minecraft 物品，仅允许原版物品 ID。",
+            "type": "string",
+            "pattern": "^minecraft:[a-z_]+$",
+            "examples": [
+                "minecraft:paper",
+                "minecraft:leather_horse_armor"
+            ]
+        },
+        "itemFrame": {
+            "description": "是否使用物品展示框（item frame）而非物品展示实体和交互实体来显示装饰。",
+            "type": "boolean",
+            "default": false,
+            "examples": [
+                true
+            ]
+        },
+        "block": {
+            "description": "当使用 'blocks' 字段时，指定用于装饰的方块，默认为 'minecraft:barrier'。",
+            "type": "string",
+            "pattern": "^minecraft:[a-z_]+(\\[.*\\])?$",
+            "examples": [
+                "minecraft:barrier",
+                "minecraft:chain[axis=y]"
+            ]
+        },
+        "translations": {
+            "description": "装饰名称的翻译，支持多种语言。",
+            "type": "object",
+            "additionalProperties": {
+                "type": "string"
+            },
+            "examples": [
+                {
+                    "en_us": "Clown Horn",
+                    "zh_cn": "小丑喇叭"
+                }
+            ]
+        },
+        "itemTags": {
+            "description": "装饰的物品标签，用于分类或功能性判定。",
+            "type": "array",
+            "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$"
+            },
+            "examples": [
+                [
+                    "minecraft:enchantable/trident"
+                ]
+            ]
+        },
+        "blockTags": {
+            "description": "装饰的方块标签，用于分类或功能性判定。",
+            "type": "array",
+            "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$"
+            },
+            "examples": [
+                [
+                    "minecraft:dirt"
+                ]
+            ]
+        },
+        "group": {
+            "description": "装饰所属的物品组，格式为 '命名空间:组名称'。",
+            "type": "string",
+            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
+            "examples": [
+                "mynamespace:mygroup"
+            ]
+        },
+        "itemResource": {
+            "description": "装饰的资源配置，定义模型和其他资源。",
+            "type": "object",
+            "required": [
+                "models"
+            ],
+            "properties": {
+                "models": {
+                    "description": "装饰的模型配置，支持不同放置位置的模型。",
+                    "type": "object",
+                    "required": [
+                        "default"
+                    ],
+                    "properties": {
+                        "default": {
+                            "description": "默认模型路径，格式为 '命名空间:路径/模型'。",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
+                            "examples": [
+                                "mynamespace:custom/misc/clown_horn"
+                            ]
+                        },
+                        "wall": {
+                            "description": "墙面放置时的模型路径。",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
+                            "examples": [
+                                "minecraft:custom/hats/backpack"
+                            ]
+                        },
+                        "ceiling": {
+                            "description": "天花板放置时的模型路径。",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
+                            "examples": [
+                                "minecraft:custom/furniture/misc/small_gold_coin_piles"
+                            ]
+                        },
+                        "floor": {
+                            "description": "地面放置时的模型路径。",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
+                            "examples": [
+                                "minecraft:custom/furniture/misc/small_gold_coin_piles"
+                            ]
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            }
+        },
+        "size": {
+            "description": "当未使用 'blocks' 字段时，指定交互实体的自定义尺寸（宽高）。",
+            "type": "array",
+            "items": {
+                "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2,
+            "examples": [
+                [
+                    3,
+                    -0.5
+                ]
+            ]
+        },
+        "properties": {
+            "description": "装饰的附加属性，控制放置、显示和物理行为。",
+            "type": "object",
+            "properties": {
+                "stackSize": {
+                    "description": "物品堆叠的最大数量。",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 64,
+                    "examples": [
+                        1
+                    ]
+                },
+                "rotate": {
+                    "description": "是否允许装饰以 90° 间隔旋转。",
+                    "type": "boolean",
+                    "default": false,
+                    "examples": [
+                        true
+                    ]
+                },
+                "rotateSmooth": {
+                    "description": "是否允许装饰以 45° 间隔平滑旋转。",
+                    "type": "boolean",
+                    "default": false,
+                    "examples": [
+                        true
+                    ]
+                },
+                "placement": {
+                    "description": "装饰的放置位置选项。",
+                    "type": "object",
+                    "properties": {
+                        "floor": {
+                            "description": "是否允许放置在地面。",
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "wall": {
+                            "description": "是否允许放置在墙面。",
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "ceiling": {
+                            "description": "是否允许放置在天花板。",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "default": {
+                        "floor": true,
+                        "wall": false,
+                        "ceiling": false
+                    }
+                },
+                "glow": {
+                    "description": "是否忽略环境光照，始终以光照等级 15 显示。",
+                    "type": "boolean",
+                    "default": false
+                },
+                "waterloggable": {
+                    "description": "装饰的方块是否可被水淹没。",
+                    "type": "boolean",
+                    "default": true
+                },
+                "solid": {
+                    "description": "装饰是否为固体（若为 false，可被水冲走）。",
+                    "type": "boolean",
+                    "default": true
+                },
+                "display": {
+                    "description": "物品展示实体的显示模式。",
+                    "type": "string",
+                    "enum": [
+                        "none",
+                        "thirdperson_lefthand",
+                        "thirdperson_righthand",
+                        "firstperson_lefthand",
+                        "firstperson_righthand",
+                        "head",
+                        "gui",
+                        "ground",
+                        "fixed"
+                    ],
+                    "default": "fixed"
+                },
+                "blockBase": {
+                    "description": "用于放置和破坏音效及粒子的基础方块，需为原版方块 ID。",
+                    "type": "string",
+                    "pattern": "^minecraft:[a-z_]+$",
+                    "default": "minecraft:stone"
+                },
+                "useItemParticles": {
+                    "description": "是否使用物品粒子效果，若为 false 则使用 blockBase 的粒子。",
+                    "type": "boolean",
+                    "default": true
+                },
+                "showBreakParticles": {
+                    "description": "是否显示破坏粒子效果。",
+                    "type": "boolean",
+                    "default": true
+                }
+            }
+        },
+        "blocks": {
+            "description": "装饰的方块碰撞配置，指定屏障方块的位置和大小。",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "origin": {
+                        "description": "方块的起始坐标（x, y, z）。",
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 3,
+                        "maxItems": 3
+                    },
+                    "size": {
+                        "description": "方块的尺寸（宽、高、深）。",
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 3,
+                        "maxItems": 3
+                    }
+                },
+                "required": [
+                    "origin",
+                    "size"
+                ]
+            }
+        },
+        "behaviour": {
+            "description": "装饰的行为配置，定义交互和功能。",
+            "type": "object",
+            "properties": {
+                "animation": {
+                    "description": "动画行为，支持 Blockbench 或 Animated Java 模型。",
+                    "type": "object",
+                    "properties": {
+                        "model": {
+                            "description": "动画模型的资源路径，格式为 '命名空间:模型名称'。",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
+                            "examples": [
+                                "mynamespace:example_chest"
+                            ]
+                        },
+                        "autoplay": {
+                            "description": "自动播放的动画名称。",
+                            "type": "string",
+                            "examples": [
+                                "idle"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "model"
+                    ]
+                },
+                "container": {
+                    "description": "容器行为，用于创建箱子、垃圾桶等。",
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "description": "容器界面的显示名称。",
+                            "type": "string",
+                            "examples": [
+                                "Example Chest"
+                            ]
+                        },
+                        "size": {
+                            "description": "容器槽位数量，需为 5 或 9 的倍数，最大 54。",
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 54,
+                            "examples": [
+                                36
+                            ]
+                        },
+                        "purge": {
+                            "description": "玩家关闭容器时是否清空内容。",
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "canPickup": {
+                            "description": "容器是否可被拾取。",
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "openAnimation": {
+                            "description": "打开容器时播放的动画名称。",
+                            "type": "string",
+                            "examples": [
+                                "open"
+                            ]
+                        },
+                        "closeAnimation": {
+                            "description": "关闭容器时播放的动画名称。",
+                            "type": "string",
+                            "examples": [
+                                "close"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "name",
+                        "size"
+                    ]
+                },
+                "lamp": {
+                    "description": "灯具行为，支持开关或光照等级循环。",
+                    "type": "object",
+                    "oneOf": [
+                        {
+                            "properties": {
+                                "on": {
+                                    "description": "开启状态的光照等级。",
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 15
+                                },
+                                "off": {
+                                    "description": "关闭状态的光照等级。",
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 15
+                                }
+                            },
+                            "required": [
+                                "on",
+                                "off"
+                            ]
+                        },
+                        {
+                            "properties": {
+                                "cycle": {
+                                    "description": "光照等级循环列表。",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer",
+                                        "minimum": 0,
+                                        "maximum": 15
+                                    },
+                                    "minItems": 1
+                                }
+                            },
+                            "required": [
+                                "cycle"
+                            ]
+                        }
+                    ]
+                },
+                "lock": {
+                    "description": "锁行为，需特定钥匙或直接交互执行命令。",
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "description": "解锁所需的钥匙物品 ID，若为空则无钥匙要求。",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
+                            "examples": [
+                                "minecraft:tripwire_hook"
+                            ]
+                        },
+                        "consumeKey": {
+                            "description": "解锁时是否消耗钥匙。",
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "discard": {
+                            "description": "解锁后是否销毁装饰。",
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "unlockAnimation": {
+                            "description": "解锁时播放的动画名称。",
+                            "type": "string",
+                            "examples": [
+                                "unlockAnimation"
+                            ]
+                        },
+                        "command": {
+                            "description": "解锁时执行的命令。",
+                            "type": "string",
+                            "examples": [
+                                "say Unlocked"
+                            ]
+                        },
+                        "atBlock": {
+                            "description": "命令是否在方块位置执行。",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "interact_execute": {
+                    "description": "与 'lock' 行为相同，用于执行交互命令，兼容旧版本。",
+                    "type": "object",
+                    "$ref": "#/properties/behaviour/properties/lock"
+                },
+                "seat": {
+                    "description": "座位行为，用于椅子、长凳等。",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "offset": {
+                                "description": "玩家座位的坐标偏移（x, y, z）。",
+                                "type": "array",
+                                "items": {
+                                    "type": "number"
+                                },
+                                "minItems": 3,
+                                "maxItems": 3,
+                                "default": [
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ]
+                            },
+                            "direction": {
+                                "description": "座位的旋转角度（度），默认 180。",
+                                "type": "number",
+                                "default": 180
+                            }
+                        },
+                        "required": [
+                            "offset"
+                        ]
+                    },
+                    "minItems": 1
+                },
+                "showcase": {
+                    "description": "展示行为，用于货架或物品展示框。",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "offset": {
+                                "description": "展示物品的坐标偏移（x, y, z）。",
+                                "type": "array",
+                                "items": {
+                                    "type": "number"
+                                },
+                                "minItems": 3,
+                                "maxItems": 3
+                            },
+                            "scale": {
+                                "description": "展示物品的缩放比例（x, y, z）。",
+                                "type": "array",
+                                "items": {
+                                    "type": "number"
+                                },
+                                "minItems": 3,
+                                "maxItems": 3
+                            },
+                            "rotation": {
+                                "description": "展示物品的旋转（x, y, z, w）。",
+                                "type": "array",
+                                "items": {
+                                    "type": "number"
+                                },
+                                "minItems": 4,
+                                "maxItems": 4
+                            },
+                            "type": {
+                                "description": "展示类型：item（物品），block（方块），dynamic（自动选择）。",
+                                "type": "string",
+                                "enum": [
+                                    "item",
+                                    "block",
+                                    "dynamic"
+                                ]
+                            },
+                            "filterItems": {
+                                "description": "允许展示的物品列表。",
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$"
+                                }
+                            },
+                            "filterTags": {
+                                "description": "允许展示的物品标签列表。",
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$"
+                                }
+                            }
+                        },
+                        "required": [
+                            "offset",
+                            "scale"
+                        ]
+                    },
+                    "minItems": 1
+                },
+                "cosmetic": {
+                    "description": "装饰性行为，用于穿戴在玩家身上的装饰。",
+                    "type": "object",
+                    "required": [
+                        "slot"
+                    ],
+                    "properties": {
+                        "slot": {
+                            "description": "装饰的装备槽位。",
+                            "type": "string",
+                            "enum": [
+                                "head",
+                                "chest",
+                                "legs",
+                                "feet",
+                                "offhand"
+                            ],
+                            "examples": [
+                                "chest"
+                            ]
+                        },
+                        "model": {
+                            "description": "装饰的动画模型路径，格式为 '命名空间:模型名称'。",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
+                            "examples": [
+                                "mynamespace:clown_backpack_animated"
+                            ]
+                        },
+                        "autoplay": {
+                            "description": "自动播放的动画名称，需为可循环动画。",
+                            "type": "string",
+                            "examples": [
+                                "idle"
+                            ]
+                        },
+                        "translation": {
+                            "description": "装饰模型的坐标偏移（x, y, z）。",
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3,
+                            "default": [
+                                0,
+                                0,
+                                0
+                            ]
+                        },
+                        "scale": {
+                            "description": "装饰模型的缩放比例（x, y, z）。",
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3,
+                            "default": [
+                                1,
+                                1,
+                                1
+                            ]
+                        }
+                    }
+                },
+                "instrument": {
+                    "description": "乐器行为，定义装饰播放的声音。",
+                    "type": "object",
+                    "properties": {
+                        "sound": {
+                            "description": "播放的声音资源路径。",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
+                            "examples": [
+                                "mynamespace:misc.honk"
+                            ]
+                        },
+                        "range": {
+                            "description": "声音传播范围（方块）。",
+                            "type": "integer",
+                            "minimum": 1,
+                            "examples": [
+                                64
+                            ]
+                        },
+                        "useDuration": {
+                            "description": "使用乐器所需的时间（tick）。",
+                            "type": "integer",
+                            "minimum": 1,
+                            "examples": [
+                                60
+                            ]
+                        }
+                    },
+                    "required": [
+                        "sound",
+                        "range",
+                        "useDuration"
+                    ]
+                }
+            }
+        },
+        "components": {
+            "description": "Minecraft 组件，用于定义额外的物品功能。",
+            "type": "object",
+            "additionalProperties": {
+                "type": "object"
+            },
+            "examples": [
+                {
+                    "minecraft:equippable": {
+                        "slot": "chest",
+                        "swappable": true,
+                        "damage_on_hurt": true,
+                        "equip_on_interact": false
+                    }
+                }
+            ]
+        }
+    },
+    "examples": [
+        {
+            "id": "mynamespace:example_chest",
+            "vanillaItem": "minecraft:paper",
+            "itemResource": {
+                "models": {
+                    "default": "mynamespace:custom/furniture/chests/example_chest"
+                }
+            },
+            "properties": {
+                "rotate": true,
+                "rotateSmooth": true,
+                "placement": {
+                    "floor": true,
+                    "wall": false,
+                    "ceiling": false
+                }
+            },
+            "behaviour": {
+                "animation": {
+                    "model": "mynamespace:example_chest",
+                    "autoplay": "idle"
+                },
+                "container": {
+                    "name": "Example Chest",
+                    "size": 36,
+                    "purge": false,
+                    "openAnimation": "open",
+                    "closeAnimation": "close"
+                }
+            },
+            "blocks": [
+                {
+                    "origin": [
+                        0,
+                        0,
+                        0
+                    ],
+                    "size": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "mynamespace:clown_horn",
+            "vanillaItem": "minecraft:paper",
+            "itemTags": [
+                "minecraft:enchantable/trident"
+            ],
+            "itemResource": {
+                "models": {
+                    "default": "mynamespace:custom/misc/clown_horn"
+                }
+            },
+            "group": "mynamespace:mygroup",
+            "properties": {
+                "stackSize": 1
+            },
+            "behaviour": {
+                "instrument": {
+                    "sound": "mynamespace:misc.honk",
+                    "range": 64,
+                    "useDuration": 60
+                }
+            }
+        },
+        {
+            "id": "mynamespace:beach_umbrella_top",
+            "vanillaItem": "minecraft:leather_horse_armor",
+            "itemResource": {
+                "models": {
+                    "default": "mynamespace:custom/furniture/umbrella/beach_umbrella_top"
+                }
+            },
+            "properties": {
+                "rotate": true,
+                "rotateSmooth": true
+            },
+            "size": [
+                3,
+                -0.5
+            ]
+        }
+    ]
+}

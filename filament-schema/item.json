@@ -1,0 +1,845 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "自定义物品配置",
+    "description": "用于定义 Filament 数据包中自定义物品的 JSON 架构，支持物品属性与行为配置。",
+    "type": "object",
+    "required": [
+        "id",
+        "vanillaItem"
+    ],
+    "properties": {
+        "id": {
+            "description": "物品的唯一标识符，格式为 '命名空间:物品名称'",
+            "type": "string",
+            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+            "examples": [
+                "mynamespace:clown_horn"
+            ]
+        },
+        "vanillaItem": {
+            "description": "用作基础的原版 Minecraft 物品，仅继承客户端外观",
+            "type": "string",
+            "pattern": "^minecraft:[a-z_]+$",
+            "examples": [
+                "minecraft:paper",
+                "minecraft:bow",
+                "minecraft:leather_chestplate"
+            ]
+        },
+        "itemModel": {
+            "description": "物品模型定义的路径，位于 'assets/namespace/items/<name>.json'，优先于 itemResource（仅支持 Minecraft 1.21.4 及以上）",
+            "type": "string",
+            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+            "examples": [
+                "mynamespace:items/clown_horn"
+            ]
+        },
+        "itemResource": {
+            "description": "物品的资源配置，包括模型和纹理，支持特定行为的模型（如弓、弩等）",
+            "type": "object",
+            "properties": {
+                "models": {
+                    "description": "物品的模型配置",
+                    "type": "object",
+                    "required": [
+                        "default"
+                    ],
+                    "properties": {
+                        "default": {
+                            "description": "默认模型路径，格式为 '命名空间:路径/模型'",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                            "examples": [
+                                "mynamespace:custom/misc/clown_horn"
+                            ]
+                        },
+                        "trapped": {
+                            "description": "用于 trap 行为的模型路径",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                        },
+                        "pulling_0": {
+                            "description": "用于 bow 或 crossbow 行为的拉弓阶段 0 模型路径",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                        },
+                        "pulling_1": {
+                            "description": "用于 bow 或 crossbow 行为的拉弓阶段 1 模型路径",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                        },
+                        "pulling_2": {
+                            "description": "用于 bow 或 crossbow 行为的拉弓阶段 2 模型路径",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                        },
+                        "arrow": {
+                            "description": "用于 crossbow 行为的箭模型路径",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                        },
+                        "rocket": {
+                            "description": "用于 crossbow 行为的烟花火箭模型路径",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                        },
+                        "blocking": {
+                            "description": "用于 shield 行为的格挡模型路径",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                        },
+                        "cast": {
+                            "description": "用于 fishing_rod 或 trident 行为的投掷模型路径",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                        },
+                        "throwing": {
+                            "description": "用于 trident 行为的投掷模型路径",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                        }
+                    },
+                    "additionalProperties": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                    }
+                },
+                "parent": {
+                    "description": "生成模型的父模型，例如 'item/generated' 或 'item/handheld'",
+                    "type": "string",
+                    "examples": [
+                        "item/generated",
+                        "item/handheld"
+                    ]
+                },
+                "textures": {
+                    "description": "纹理配置",
+                    "type": "object",
+                    "properties": {
+                        "default": {
+                            "type": "object",
+                            "properties": {
+                                "layer0": {
+                                    "description": "默认纹理路径",
+                                    "type": "string",
+                                    "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                                }
+                            }
+                        },
+                        "trapped": {
+                            "type": "object",
+                            "properties": {
+                                "layer0": {
+                                    "description": "用于 trap 行为的纹理路径",
+                                    "type": "string",
+                                    "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                                }
+                            }
+                        }
+                    },
+                    "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                            "layer0": {
+                                "type": "string",
+                                "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "properties": {
+            "description": "物品的附加属性，适用于物品、方块和装饰品，所有属性均为可选",
+            "type": "object",
+            "properties": {
+                "durability": {
+                    "description": "物品耐久度，仅适用于默认具有耐久条的原版物品（如工具、武器、盔甲）",
+                    "type": "integer",
+                    "minimum": 1,
+                    "examples": [
+                        100
+                    ]
+                },
+                "stackSize": {
+                    "description": "物品堆叠上限（1-99），超过99或小于1可能导致问题",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 99,
+                    "default": 64
+                },
+                "lore": {
+                    "description": "物品描述文本列表，支持 PlaceholderAPI 简单文本格式",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "examples": [
+                            "<c:red>传说之物</c>",
+                            "<lang:'mymod.lore.mylore'>"
+                        ]
+                    }
+                },
+                "fireResistant": {
+                    "description": "物品是否防火",
+                    "type": "boolean",
+                    "default": false
+                }
+            }
+        },
+        "group": {
+            "description": "物品所属的物品组，详见物品组文档",
+            "type": "string",
+            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+            "examples": [
+                "mynamespace:tools"
+            ]
+        },
+        "behaviour": {
+            "description": "物品的行为配置，定义特定功能或交互，部分行为互斥（如 trap、shoot、instrument）",
+            "type": "object",
+            "properties": {
+                "armor": {
+                    "description": "定义盔甲行为，使用 Fancypants 着色器或盔甲纹饰",
+                    "type": "object",
+                    "required": [
+                        "slot",
+                        "texture"
+                    ],
+                    "properties": {
+                        "slot": {
+                            "description": "盔甲装备槽",
+                            "type": "string",
+                            "enum": [
+                                "head",
+                                "chest",
+                                "legs",
+                                "feet"
+                            ]
+                        },
+                        "texture": {
+                            "description": "盔甲纹理路径，位于 'assets/minecraft/textures/models/armor/' 或 'assets/minecraft/textures/trims/models/armor/'",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                            "examples": [
+                                "mynamespace:amethyst"
+                            ]
+                        },
+                        "trim": {
+                            "description": "是否使用盔甲纹饰渲染（需原版盔甲物品）",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "compostable": {
+                    "description": "定义可堆肥行为",
+                    "type": "object",
+                    "properties": {
+                        "chance": {
+                            "description": "提高堆肥器等级的几率（0-100）",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100
+                        },
+                        "villagerInteraction": {
+                            "description": "是否允许农民村民堆肥此物品",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    }
+                },
+                "cosmetic": {
+                    "description": "定义装饰品行为，支持头部或胸部槽位",
+                    "type": "object",
+                    "required": [
+                        "slot"
+                    ],
+                    "properties": {
+                        "slot": {
+                            "description": "装饰品装备槽",
+                            "type": "string",
+                            "enum": [
+                                "head",
+                                "chest"
+                            ]
+                        },
+                        "model": {
+                            "description": "装饰品的模型路径（支持 Blockbench 或 animated-java 模型）",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                        },
+                        "autoplay": {
+                            "description": "自动播放的循环动画名称",
+                            "type": "string"
+                        },
+                        "scale": {
+                            "description": "装饰品缩放比例（X, Y, Z）",
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3,
+                            "default": [
+                                1,
+                                1,
+                                1
+                            ]
+                        },
+                        "translation": {
+                            "description": "装饰品平移偏移（X, Y, Z）",
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3,
+                            "default": [
+                                0,
+                                0,
+                                0
+                            ]
+                        }
+                    }
+                },
+                "item_interact_execute": {
+                    "description": "定义物品使用时执行命令的行为",
+                    "type": "object",
+                    "properties": {
+                        "consumes": {
+                            "description": "执行命令后是否消耗物品",
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "command": {
+                            "description": "要执行的单个命令",
+                            "type": "string"
+                        },
+                        "commands": {
+                            "description": "要执行的命令列表",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "sound": {
+                            "description": "执行时播放的声音",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                        }
+                    }
+                },
+                "item_attack_execute": {
+                    "description": "定义攻击实体或挥动物品时执行命令的行为",
+                    "type": "object",
+                    "properties": {
+                        "consumes": {
+                            "description": "执行命令后是否消耗物品",
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "command": {
+                            "description": "要执行的单个命令",
+                            "type": "string"
+                        },
+                        "commands": {
+                            "description": "要执行的命令列表",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "sound": {
+                            "description": "执行时播放的声音",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                        },
+                        "onEntityAttack": {
+                            "description": "是否仅在攻击实体时执行命令，否则也在挥动时执行",
+                            "type": "boolean",
+                            "default": true
+                        }
+                    }
+                },
+                "food": {
+                    "description": "定义食物行为",
+                    "type": "object",
+                    "properties": {
+                        "hunger": {
+                            "description": "食用后恢复的饥饿值",
+                            "type": "number",
+                            "default": 1
+                        },
+                        "saturation": {
+                            "description": "食用后提供的饱和度修正",
+                            "type": "number",
+                            "default": 0.6
+                        },
+                        "canAlwaysEat": {
+                            "description": "是否可以在饥饿条满时食用",
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "fastfood": {
+                            "description": "是否为快餐（食用速度更快）",
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "meat": {
+                            "description": "是否为肉类食物",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "villager_food": {
+                    "description": "定义村民可食用的食物（用于繁殖）",
+                    "type": "object",
+                    "properties": {
+                        "value": {
+                            "description": "繁殖能力值（1=普通食物，4=面包）",
+                            "type": "integer",
+                            "default": 1
+                        }
+                    }
+                },
+                "fuel": {
+                    "description": "定义燃料行为",
+                    "type": "object",
+                    "properties": {
+                        "value": {
+                            "description": "燃料值，决定燃烧时长",
+                            "type": "integer",
+                            "default": 10
+                        }
+                    }
+                },
+                "hoe": {
+                    "description": "定义锄头行为，可耕种农田，消耗1点耐久",
+                    "type": "object",
+                    "properties": {
+                        "sound": {
+                            "description": "耕种时播放的声音",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                            "default": "minecraft:item.hoe.till"
+                        }
+                    }
+                },
+                "shovel": {
+                    "description": "定义铲子行为，可将方块变为路径，消耗1点耐久",
+                    "type": "object",
+                    "properties": {
+                        "sound": {
+                            "description": "操作时播放的声音",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                        }
+                    }
+                },
+                "shears": {
+                    "description": "定义剪刀行为，可剪切方块和植物，消耗1点耐久",
+                    "type": "object",
+                    "properties": {
+                        "sound": {
+                            "description": "剪切时播放的声音",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                        }
+                    }
+                },
+                "instrument": {
+                    "description": "定义乐器行为（如山羊角）",
+                    "type": "object",
+                    "required": [
+                        "sound"
+                    ],
+                    "properties": {
+                        "sound": {
+                            "description": "乐器播放的声音",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
+                        },
+                        "range": {
+                            "description": "乐器声音传播范围",
+                            "type": "number",
+                            "default": 64
+                        },
+                        "useDuration": {
+                            "description": "使用乐器的延迟（tick）",
+                            "type": "integer",
+                            "default": 0
+                        }
+                    }
+                },
+                "stripper": {
+                    "description": "定义剥皮行为，可剥去原木或刮除铜块，消耗1点耐久",
+                    "type": "object",
+                    "properties": {
+                        "sound": {
+                            "description": "操作时播放的声音",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                            "default": "minecraft:item.axe.strip"
+                        }
+                    }
+                },
+                "trap": {
+                    "description": "定义陷阱行为，可捕获特定实体",
+                    "type": "object",
+                    "required": [
+                        "types"
+                    ],
+                    "properties": {
+                        "types": {
+                            "description": "可捕获的实体类型列表",
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "pattern": "^minecraft:[a-z_]+$"
+                            }
+                        },
+                        "requiredEffects": {
+                            "description": "捕获所需的实体效果列表",
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "pattern": "^minecraft:[a-z_]+$"
+                            }
+                        },
+                        "chance": {
+                            "description": "捕获触发几率（0-100）",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 100,
+                            "default": 50
+                        },
+                        "useDuration": {
+                            "description": "陷阱物品使用冷却时间（tick）",
+                            "type": "integer",
+                            "default": 0
+                        }
+                    }
+                },
+                "banner_pattern": {
+                    "description": "定义旗帜图案行为，用于织布机",
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "description": "旗帜图案在数据包中的 ID",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$"
+                        }
+                    }
+                },
+                "bow": {
+                    "description": "定义弓行为，需使用 'minecraft:bow' 作为 vanillaItem",
+                    "type": "object",
+                    "properties": {
+                        "powerMultiplier": {
+                            "description": "射击力量倍率",
+                            "type": "number",
+                            "default": 3
+                        },
+                        "supportedProjectiles": {
+                            "description": "库存中支持的投射物物品",
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "pattern": "^minecraft:[a-z_]+$"
+                            },
+                            "default": [
+                                "minecraft:arrow",
+                                "minecraft:spectral_arrow"
+                            ]
+                        },
+                        "supportedHeldProjectiles": {
+                            "description": "主手或副手中支持的投射物物品",
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "pattern": "^minecraft:[a-z_]+$"
+                            },
+                            "default": [
+                                "minecraft:arrow",
+                                "minecraft:spectral_arrow",
+                                "minecraft:firework_rocket"
+                            ]
+                        },
+                        "shootSound": {
+                            "description": "射击投射物时的声音",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
+                            "default": "minecraft:entity.arrow.shoot"
+                        }
+                    }
+                },
+                "crossbow": {
+                    "description": "定义弩行为，需使用 'minecraft:crossbow' 作为 vanillaItem",
+                    "type": "object",
+                    "properties": {
+                        "powerMultiplier": {
+                            "description": "射击力量倍率",
+                            "type": "number",
+                            "default": 1
+                        },
+                        "supportedProjectiles": {
+                            "description": "库存中支持的投射物物品",
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "pattern": "^minecraft:[a-z_]+$"
+                            },
+                            "default": [
+                                "minecraft:arrow",
+                                "minecraft:spectral_arrow"
+                            ]
+                        },
+                        "supportedHeldProjectiles": {
+                            "description": "主手或副手中支持的投射物物品",
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "pattern": "^minecraft:[a-z_]+$"
+                            },
+                            "default": [
+                                "minecraft:arrow",
+                                "minecraft:spectral_arrow",
+                                "minecraft:firework_rocket"
+                            ]
+                        },
+                        "shootSound": {
+                            "description": "射击投射物时的声音",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
+                            "default": "minecraft:item.crossbow.shoot"
+                        },
+                        "loadingStartSound": {
+                            "description": "装填开始时的声音",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
+                            "default": "minecraft:item.crossbow.loading_start"
+                        },
+                        "loadingMiddleSound": {
+                            "description": "装填进行中的声音",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
+                            "default": "minecraft:item.crossbow.loading_middle"
+                        },
+                        "loadingEndSound": {
+                            "description": "装填完成时的声音",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
+                            "default": "minecraft:item.crossbow.loading_end"
+                        }
+                    }
+                },
+                "shoot": {
+                    "description": "定义射击行为（已废弃，推荐使用 bow、crossbow 或 trident）",
+                    "type": "object",
+                    "properties": {
+                        "consumes": {
+                            "description": "射击是否消耗物品",
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "baseDamage": {
+                            "description": "投射物基础伤害",
+                            "type": "number",
+                            "default": 2.0
+                        },
+                        "speed": {
+                            "description": "投射物发射速度",
+                            "type": "number",
+                            "default": 1.0
+                        },
+                        "projectile": {
+                            "description": "投射物物品的标识符",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$"
+                        },
+                        "sound": {
+                            "description": "射击时播放的声音",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$"
+                        },
+                        "translation": {
+                            "description": "投射物平移偏移（X, Y, Z）",
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3,
+                            "default": [
+                                0,
+                                0,
+                                0
+                            ]
+                        },
+                        "rotation": {
+                            "description": "投射物旋转角度（X, Y, Z）",
+                            "type": "array",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3,
+                            "default": [
+                                0,
+                                90,
+                                0
+                            ]
+                        },
+                        "scale": {
+                            "description": "投射物缩放比例",
+                            "type": "number",
+                            "default": 0.6
+                        }
+                    }
+                },
+                "shield": {
+                    "description": "定义盾牌行为",
+                    "type": "object",
+                    "properties": {}
+                },
+                "fishing_rod": {
+                    "description": "定义钓鱼竿行为",
+                    "type": "object",
+                    "properties": {}
+                },
+                "trident": {
+                    "description": "定义三叉戟行为（实验性，仅支持 Minecraft 1.21.4 及以上）",
+                    "type": "object",
+                    "properties": {}
+                },
+                "mace": {
+                    "description": "定义狼牙棒行为",
+                    "type": "object",
+                    "properties": {
+                        "damageMultiplier": {
+                            "description": "重击实体时的伤害倍率",
+                            "type": "number",
+                            "default": 1.0
+                        }
+                    }
+                },
+                "enchantable": {
+                    "description": "定义可附魔行为（1.21.2 回溯，仅限 1.21.1）",
+                    "type": "object",
+                    "properties": {
+                        "value": {
+                            "description": "附魔值",
+                            "type": "integer",
+                            "default": 1
+                        }
+                    }
+                },
+                "repairable": {
+                    "description": "定义可修复行为（1.21.2 回溯，仅限 1.21.1）",
+                    "type": "object",
+                    "properties": {
+                        "items": {
+                            "description": "可用于修复的物品或物品标签列表",
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "pattern": "^(#[a-z0-9_]+:[a-z0-9_/]+|[a-z0-9_]+:[a-z0-9_/]+)$"
+                            }
+                        }
+                    }
+                }
+            },
+            "additionalProperties": {
+                "type": "object",
+                "description": "其他行为配置"
+            }
+        },
+        "components": {
+            "description": "原版 Minecraft 组件（如 minecraft:food、minecraft:tool 等），格式与数据包一致，仅支持 Minecraft 1.20.5 及以上",
+            "type": "object",
+            "additionalProperties": true,
+            "examples": [
+                {
+                    "minecraft:food": {
+                        "nutrition": 4,
+                        "saturation_modifier": 0.6
+                    },
+                    "minecraft:tool": {
+                        "default_mining_speed": 1.0
+                    }
+                }
+            ]
+        }
+    },
+    "examples": [
+        {
+            "id": "mynamespace:clown_horn",
+            "vanillaItem": "minecraft:paper",
+            "itemResource": {
+                "models": {
+                    "default": "mynamespace:custom/misc/clown_horn"
+                }
+            },
+            "properties": {
+                "durability": 100,
+                "stackSize": 64,
+                "lore": [
+                    "<c:red>搞笑喇叭</c>",
+                    "Honk!"
+                ],
+                "fireResistant": false
+            },
+            "behaviour": {
+                "instrument": {
+                    "sound": "mynamespace:misc.honk",
+                    "range": 64,
+                    "useDuration": 60
+                }
+            }
+        },
+        {
+            "id": "mynamespace:epic_armor",
+            "vanillaItem": "minecraft:leather_chestplate",
+            "itemResource": {
+                "models": {
+                    "default": "mynamespace:armor/epic_chestplate"
+                }
+            },
+            "behaviour": {
+                "armor": {
+                    "slot": "chest",
+                    "texture": "mynamespace:epic_armor",
+                    "trim": true
+                }
+            }
+        },
+        {
+            "id": "mynamespace:custom_bow",
+            "vanillaItem": "minecraft:bow",
+            "itemResource": {
+                "models": {
+                    "default": "mynamespace:custom/bow/custombow",
+                    "pulling_0": "mynamespace:custom/bow/custombow_pulling_0",
+                    "pulling_1": "mynamespace:custom/bow/custombow_pulling_1",
+                    "pulling_2": "mynamespace:custom/bow/custombow_pulling_2"
+                }
+            },
+            "behaviour": {
+                "bow": {
+                    "powerMultiplier": 3,
+                    "supportedProjectiles": [
+                        "minecraft:arrow",
+                        "minecraft:spectral_arrow"
+                    ],
+                    "supportedHeldProjectiles": [
+                        "minecraft:arrow",
+                        "minecraft:spectral_arrow",
+                        "minecraft:firework_rocket"
+                    ],
+                    "shootSound": "minecraft:entity.arrow.shoot"
+                }
+            }
+        }
+    ]
+}

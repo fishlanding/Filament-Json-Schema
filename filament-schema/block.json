@@ -1,0 +1,703 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "自定义方块配置",
+    "description": "用于定义 Filament 数据包中自定义方块的 JSON 架构，支持方块的属性与行为配置。",
+    "type": "object",
+    "required": [
+        "id",
+        "blockResource"
+    ],
+    "properties": {
+        "id": {
+            "description": "方块的唯一标识符，格式为 '命名空间:方块名称'",
+            "type": "string",
+            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+            "examples": [
+                "mynamespace:audible_concrete_bricks",
+                "mynamespace:pebbles"
+            ]
+        },
+        "vanillaItem": {
+            "description": "客户端显示的原版物品，内部使用 CustomModelData 进行皮肤覆盖，默认为 'minecraft:paper'",
+            "type": "string",
+            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+            "default": "minecraft:paper",
+            "examples": [
+                "minecraft:paper",
+                "minecraft:stone"
+            ]
+        },
+        "blockResource": {
+            "description": "方块的资源配置，用于指定不同方块状态的模型",
+            "type": "object",
+            "required": [
+                "models"
+            ],
+            "properties": {
+                "models": {
+                    "description": "方块模型配置，键为方块状态（如 'count=1' 或 'waterlogged=true'），值为模型路径或模型对象",
+                    "type": "object",
+                    "additionalProperties": {
+                        "oneOf": [
+                            {
+                                "type": "string",
+                                "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                                "examples": [
+                                    "mynamespace:custom/block/stone/pebbles_1",
+                                    "minecraft:custom/block/dirt/dirt_slab"
+                                ]
+                            },
+                            {
+                                "type": "object",
+                                "required": [
+                                    "model"
+                                ],
+                                "properties": {
+                                    "model": {
+                                        "description": "模型路径，格式为 '命名空间:路径/模型'",
+                                        "type": "string",
+                                        "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                                        "examples": [
+                                            "minecraft:block/furnace",
+                                            "minecraft:block/furnace_on"
+                                        ]
+                                    },
+                                    "x": {
+                                        "description": "X轴旋转角度（度），用于模型朝向调整",
+                                        "type": "integer",
+                                        "enum": [0, 90, 180, 270],
+                                        "examples": [90]
+                                    },
+                                    "y": {
+                                        "description": "Y轴旋转角度（度），用于模型朝向调整",
+                                        "type": "integer",
+                                        "enum": [0, 90, 180, 270],
+                                        "examples": [0, 90, 180, 270]
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "properties": {
+                        "default": {
+                            "oneOf": [
+                                {
+                                    "type": "string",
+                                    "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                                    "examples": [
+                                        "minecraft:custom/block/concrete/black_concrete_bricks"
+                                    ]
+                                },
+                                {
+                                    "type": "object",
+                                    "required": [
+                                        "model"
+                                    ],
+                                    "properties": {
+                                        "model": {
+                                            "description": "默认模型路径，格式为 '命名空间:路径/模型'",
+                                            "type": "string",
+                                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                                            "examples": [
+                                                "minecraft:block/furnace"
+                                            ]
+                                        },
+                                        "x": {
+                                            "description": "X轴旋转角度（度），用于模型朝向调整",
+                                            "type": "integer",
+                                            "enum": [0, 90, 180, 270],
+                                            "examples": [90]
+                                        },
+                                        "y": {
+                                            "description": "Y轴旋转角度（度），用于模型朝向调整",
+                                            "type": "integer",
+                                            "enum": [0, 90, 180, 270],
+                                            "examples": [0, 90, 180, 270]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "itemResource": {
+            "description": "物品的资源配置，用于指定不同物品状态的模型",
+            "type": "object",
+            "properties": {
+                "models": {
+                    "description": "物品模型配置，键为状态（如 'default' 或 'trapped'），值为模型路径",
+                    "type": "object",
+                    "properties": {
+                        "default": {
+                            "description": "默认物品模型路径",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                            "examples": [
+                                "mynamespace:custom/block/stone/pebbles_item"
+                            ]
+                        }
+                    },
+                    "additionalProperties": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                        "examples": [
+                            "mynamespace:custom/trap/allay_trap_filled"
+                        ]
+                    }
+                }
+            }
+        },
+        "itemModel": {
+            "description": "物品模型定义路径，覆盖 itemResource 字段，位于 'assets/namespace/items/<name>.json'",
+            "type": "string",
+            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+            "examples": [
+                "mynamespace:items/pebbles_item"
+            ]
+        },
+        "blockModelType": {
+            "description": "方块模型类型，决定方块的渲染和碰撞箱，部分行为可能要求此字段为空。支持映射到方块状态（如 'waterlogged=true'）。",
+            "oneOf": [
+                {
+                    "type": "string",
+                    "enum": [
+                        "full_block",
+                        "transparent_block",
+                        "transparent_block_waterlogged",
+                        "biome_transparent_block",
+                        "biome_transparent_block_waterlogged",
+                        "farmland_block",
+                        "vines_block",
+                        "plant_block",
+                        "biome_plant_block",
+                        "kelp_block",
+                        "cactus_block",
+                        "tripwire_block",
+                        "tripwire_block_flat",
+                        "top_slab",
+                        "top_slab_waterlogged",
+                        "bottom_slab",
+                        "bottom_slab_waterlogged",
+                        "slab",
+                        "stairs",
+                        "fence",
+                        "wall",
+                        "door",
+                        "trapdoor",
+                        "custom",
+                        "sculk_sensor_block",
+                        "sculk_sensor_block_waterlogged"
+                    ],
+                    "examples": [
+                        "full_block",
+                        "biome_plant_block",
+                        "sculk_sensor_block"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "enum": [
+                            "full_block",
+                            "transparent_block",
+                            "transparent_block_waterlogged",
+                            "biome_transparent_block",
+                            "biome_transparent_block_waterlogged",
+                            "farmland_block",
+                            "vines_block",
+                            "plant_block",
+                            "biome_plant_block",
+                            "kelp_block",
+                            "cactus_block",
+                            "tripwire_block",
+                            "tripwire_block_flat",
+                            "top_slab",
+                            "top_slab_waterlogged",
+                            "bottom_slab",
+                            "bottom_slab_waterlogged",
+                            "slab",
+                            "stairs",
+                            "fence",
+                            "wall",
+                            "door",
+                            "trapdoor",
+                            "custom",
+                            "sculk_sensor_block",
+                            "sculk_sensor_block_waterlogged"
+                        ]
+                    },
+                    "examples": [
+                        {
+                            "waterlogged=false": "sculk_sensor_block",
+                            "waterlogged=true": "sculk_sensor_block_waterlogged"
+                        }
+                    ]
+                }
+            ]
+        },
+        "virtual": {
+            "description": "是否将方块标记为虚拟方块，使用空的方块模型和虚拟物品展示实体。默认为 false",
+            "type": "boolean",
+            "default": false,
+            "examples": [
+                true,
+                false
+            ]
+        },
+        "properties": {
+            "description": "方块的附加属性，定义物理和交互行为",
+            "type": "object",
+            "properties": {
+                "blockBase": {
+                    "description": "基础方块，用于声音和地图上的方块颜色，默认为 'minecraft:stone'",
+                    "type": "string",
+                    "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                    "default": "minecraft:stone",
+                    "examples": [
+                        "minecraft:stone",
+                        "minecraft:dirt"
+                    ]
+                },
+                "requiresTool": {
+                    "description": "是否需要特定工具来挖掘方块，默认为 true",
+                    "type": "boolean",
+                    "default": true,
+                    "examples": [
+                        true,
+                        false
+                    ]
+                },
+                "explosionResistance": {
+                    "description": "方块的爆炸抗性，默认为 0",
+                    "type": "number",
+                    "minimum": 0,
+                    "default": 0,
+                    "examples": [
+                        10
+                    ]
+                },
+                "destroyTime": {
+                    "description": "破坏方块所需时间，-1 表示不可破坏，默认为 0。对于瞬破方块（如 plant_block），必须设为 0",
+                    "type": "number",
+                    "minimum": -1,
+                    "default": 0,
+                    "examples": [
+                        5,
+                        0,
+                        -1
+                    ]
+                },
+                "redstoneConductor": {
+                    "description": "方块是否传导红石信号，可映射到方块状态，默认为 true",
+                    "oneOf": [
+                        {
+                            "type": "boolean",
+                            "default": true,
+                            "examples": [
+                                true,
+                                false
+                            ]
+                        },
+                        {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "boolean"
+                            },
+                            "examples": [
+                                {
+                                    "powerlevel=0": true,
+                                    "powerlevel=1": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "lightEmission": {
+                    "description": "方块发光等级（0-15），可映射到方块状态，默认为 0",
+                    "oneOf": [
+                        {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 15,
+                            "default": 0,
+                            "examples": [
+                                0,
+                                15
+                            ]
+                        },
+                        {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 15
+                            },
+                            "examples": [
+                                {
+                                    "powerlevel=0": 0,
+                                    "powerlevel=1": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "transparent": {
+                    "description": "方块是否透明（不阻挡光线），默认为 false",
+                    "type": "boolean",
+                    "default": false,
+                    "examples": [
+                        true,
+                        false
+                    ]
+                },
+                "isSuffocating": {
+                    "description": "方块是否会导致窒息伤害，未设置时无默认值",
+                    "type": "boolean",
+                    "examples": [
+                        true,
+                        false
+                    ]
+                },
+                "jumpFactor": {
+                    "description": "方块的跳跃因子，低于 1 表示粘性，高于 1 表示弹跳，默认为 1.0",
+                    "type": "number",
+                    "default": 1.0,
+                    "examples": [
+                        0.5,
+                        1.5
+                    ]
+                },
+                "allowsSpawning": {
+                    "description": "是否允许生物在方块上生成，默认为 false",
+                    "type": "boolean",
+                    "default": false,
+                    "examples": [
+                        true,
+                        false
+                    ]
+                },
+                "replaceable": {
+                    "description": "方块是否可被其他方块替换（如放置新方块时），默认为 false",
+                    "type": "boolean",
+                    "default": false,
+                    "examples": [
+                        true,
+                        false
+                    ]
+                },
+                "collision": {
+                    "description": "方块是否具有碰撞箱，默认为 true",
+                    "type": "boolean",
+                    "default": true,
+                    "examples": [
+                        true,
+                        false
+                    ]
+                },
+                "solid": {
+                    "description": "方块是否会被水冲走，默认为 true",
+                    "type": "boolean",
+                    "default": true,
+                    "examples": [
+                        true,
+                        false
+                    ]
+                },
+                "pushReaction": {
+                    "description": "方块被活塞推动时的反应，默认为 'normal'",
+                    "type": "string",
+                    "enum": [
+                        "normal",
+                        "destroy",
+                        "block"
+                    ],
+                    "default": "normal",
+                    "examples": [
+                        "normal",
+                        "destroy"
+                    ]
+                },
+                "lootTable": {
+                    "description": "方块的掉落表，默认为 '<namespace>:blocks/<blockname>'",
+                    "type": "string",
+                    "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                    "examples": [
+                        "minecraft:blocks/dirt",
+                        "mynamespace:blocks/myblock"
+                    ]
+                },
+                "sounds": {
+                    "description": "方块的声音配置，包含音量、音高和各种交互音效",
+                    "type": "object",
+                    "properties": {
+                        "volume": {
+                            "description": "音量（0.0-1.0），默认为 1",
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "default": 1,
+                            "examples": [
+                                1,
+                                0.5
+                            ]
+                        },
+                        "pitch": {
+                            "description": "音高（0-2.0），默认为 1",
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 2,
+                            "default": 1,
+                            "examples": [
+                                0.2,
+                                1.5
+                            ]
+                        },
+                        "break": {
+                            "description": "方块破坏时的音效",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                            "examples": [
+                                "minecraft:entity.allay.hurt"
+                            ]
+                        },
+                        "step": {
+                            "description": "踩踏方块时的音效",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                            "examples": [
+                                "minecraft:entity.sniffer.hurt"
+                            ]
+                        },
+                        "place": {
+                            "description": "放置方块时的音效",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                            "examples": [
+                                "minecraft:entity.shulker.hurt"
+                            ]
+                        },
+                        "hit": {
+                            "description": "击打或挖掘方块时的音效",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                            "examples": [
+                                "minecraft:entity.axolotl.hurt"
+                            ]
+                        },
+                        "fall": {
+                            "description": "实体落在方块上的音效",
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                            "examples": [
+                                "minecraft:item.bone_meal.use"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "blockTags": {
+            "description": "方块标签，用于分类或行为控制",
+            "type": "array",
+            "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                "examples": [
+                    "minecraft:dirt",
+                    "minecraft:climbable"
+                ]
+            },
+            "examples": [
+                ["minecraft:dirt", "minecraft:climbable"]
+            ]
+        },
+        "itemTags": {
+            "description": "方块物品的标签，用于分类或行为控制",
+            "type": "array",
+            "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+                "examples": [
+                    "minecraft:enchantable/durability"
+                ]
+            },
+            "examples": [
+                ["minecraft:enchantable/durability"]
+            ]
+        },
+        "group": {
+            "description": "方块物品所属的物品组，参见物品组文档",
+            "type": "string",
+            "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
+            "examples": [
+                "mynamespace:myblockgroup"
+            ]
+        },
+        "components": {
+            "description": "方块物品的 Minecraft 组件配置，例如工具属性",
+            "type": "object",
+            "additionalProperties": true,
+            "examples": [
+                {
+                    "minecraft:tool": {
+                        "default_mining_speed": 1.0,
+                        "damage_per_block": 2,
+                        "rules": [
+                            {
+                                "speed": 15,
+                                "correct_for_drops": true,
+                                "blocks": "#sword_efficient"
+                            },
+                            {
+                                "speed": 1.5,
+                                "blocks": "cobweb"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "behaviour": {
+            "description": "方块的行为配置，例如水淹行为",
+            "type": "object",
+            "additionalProperties": true,
+            "examples": [
+                {
+                    "simple_waterloggable": {}
+                }
+            ]
+        }
+    },
+    "examples": [
+        {
+            "id": "mynamespace:audible_concrete_bricks",
+            "blockResource": {
+                "models": {
+                    "default": "minecraft:custom/block/concrete/black_concrete_bricks"
+                }
+            },
+            "properties": {
+                "sounds": {
+                    "volume": 1,
+                    "pitch": 0.2,
+                    "break": "minecraft:entity.allay.hurt",
+                    "step": "minecraft:entity.sniffer.hurt",
+                    "place": "minecraft:entity.shulker.hurt",
+                    "hit": "minecraft:entity.axolotl.hurt",
+                    "fall": "minecraft:item.bone_meal.use"
+                },
+                "destroyTime": 2
+            },
+            "blockModelType": "full_block"
+        },
+        {
+            "id": "mynamespace:pebbles",
+            "vanillaItem": "minecraft:paper",
+            "itemTags": ["minecraft:enchantable/durability"],
+            "blockTags": ["minecraft:dirt"],
+            "blockResource": {
+                "models": {
+                    "count=1": "mynamespace:custom/block/stone/pebbles_1",
+                    "count=2": "mynamespace:custom/block/stone/pebbles_2",
+                    "count=3": "mynamespace:custom/block/stone/pebbles_3",
+                    "count=4": "mynamespace:custom/block/stone/pebbles_4"
+                }
+            },
+            "itemResource": {
+                "models": {
+                    "default": "mynamespace:custom/block/stone/pebbles_item"
+                }
+            },
+            "blockModelType": "biome_plant_block",
+            "properties": {
+                "destroyTime": 0,
+                "blockBase": "minecraft:stone"
+            },
+            "group": "mynamespace:myblockgroup"
+        },
+        {
+            "id": "mynamespace:half_slab",
+            "blockTags": ["minecraft:climbable"],
+            "blockResource": {
+                "models": {
+                    "waterlogged=false": "minecraft:custom/block/dirt/dirt_slab",
+                    "waterlogged=true": "minecraft:custom/block/dirt/dirt_slab"
+                }
+            },
+            "itemResource": {
+                "models": {
+                    "default": "minecraft:custom/block/dirt/dirt_slab"
+                }
+            },
+            "behaviour": {
+                "simple_waterloggable": {}
+            },
+            "blockModelType": {
+                "waterlogged=false": "sculk_sensor_block",
+                "waterlogged=true": "sculk_sensor_block_waterlogged"
+            },
+            "properties": {
+                "blockBase": "minecraft:dirt"
+            }
+        },
+        {
+            "id": "mynamespace:custom_furnace",
+            "blockResource": {
+                "models": {
+                    "enabled=false,facing=north": {
+                        "model": "minecraft:block/furnace",
+                        "y": 0
+                    },
+                    "enabled=false,facing=south": {
+                        "model": "minecraft:block/furnace",
+                        "y": 180
+                    },
+                    "enabled=false,facing=east": {
+                        "model": "minecraft:block/furnace",
+                        "y": 90
+                    },
+                    "enabled=false,facing=west": {
+                        "model": "minecraft:block/furnace",
+                        "y": 270
+                    },
+                    "enabled=false,facing=down": {
+                        "model": "minecraft:block/furnace_on",
+                        "x": 90
+                    },
+                    "enabled=true,facing=north": {
+                        "model": "minecraft:block/furnace",
+                        "y": 0
+                    },
+                    "enabled=true,facing=south": {
+                        "model": "minecraft:block/furnace",
+                        "y": 180
+                    },
+                    "enabled=true,facing=east": {
+                        "model": "minecraft:block/furnace",
+                        "y": 90
+                    },
+                    "enabled=true,facing=west": {
+                        "model": "minecraft:block/furnace",
+                        "y": 270
+                    },
+                    "enabled=true,facing=down": {
+                        "model": "minecraft:block/furnace_on",
+                        "x": 90
+                    }
+                }
+            },
+            "blockModelType": {
+                "waterlogged=false": "sculk_sensor_block",
+                "waterlogged=true": "sculk_sensor_block_waterlogged"
+            },
+            "properties": {
+                "blockBase": "minecraft:stone",
+                "destroyTime": 3.5,
+                "explosionResistance": 6
+            }
+        }
+    ]
+}
