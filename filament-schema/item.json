@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "自定义物品配置",
-    "description": "用于定义 Filament 数据包中自定义物品的 JSON 架构，支持物品属性与行为配置。",
+    "description": "用于定义 Filament 数据包中自定义物品的 JSON 架构,支持物品属性与行为配置",
     "type": "object",
     "required": [
         "id",
@@ -9,7 +9,7 @@
     ],
     "properties": {
         "id": {
-            "description": "物品的唯一标识符，格式为 '<namespace>:<itemname>'",
+            "description": "物品的唯一标识符,格式为 '<namespace>:<itemname>'",
             "type": "string",
             "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
             "examples": [
@@ -17,7 +17,7 @@
             ]
         },
         "vanillaItem": {
-            "description": "用作基础的原版 Minecraft 物品，仅继承客户端外观",
+            "description": "用作基础的原版 Minecraft 物品,仅继承客户端外观",
             "type": "string",
             "pattern": "^[a-z0-9_]+:[a-z_]+$",
             "examples": [
@@ -27,7 +27,7 @@
             ]
         },
         "itemModel": {
-            "description": "物品模型定义的路径，位于 'assets/namespace/items/<name>.json'，优先于 itemResource（仅支持 Minecraft 1.21.4 及以上）",
+            "description": "物品模型定义的路径,位于 'assets/namespace/items/<name>.json',优先于 itemResource（仅支持 Minecraft 1.21.4 及以上）",
             "type": "string",
             "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
             "examples": [
@@ -35,7 +35,7 @@
             ]
         },
         "itemResource": {
-            "description": "物品的资源配置，包括模型和纹理，支持特定行为的模型（如弓、弩等）",
+            "description": "物品的资源配置,包括模型和纹理,支持特定行为的模型（如弓、弩等）",
             "type": "object",
             "properties": {
                 "models": {
@@ -46,7 +46,7 @@
                     ],
                     "properties": {
                         "default": {
-                            "description": "默认模型路径，格式为 '<namespace>:path/model'",
+                            "description": "默认模型路径,格式为 '<namespace>:path/model'",
                             "type": "string",
                             "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
                             "examples": [
@@ -105,7 +105,7 @@
                     }
                 },
                 "parent": {
-                    "description": "生成模型的父模型，例如 'item/generated' 或 'item/handheld'",
+                    "description": "生成模型的父模型,例如 'item/generated' 或 'item/handheld'",
                     "type": "string",
                     "examples": [
                         "item/generated",
@@ -150,11 +150,11 @@
             }
         },
         "properties": {
-            "description": "物品的附加属性，适用于物品、方块和装饰品，所有属性均为可选",
+            "description": "物品的附加属性,适用于物品、方块和装饰品,所有属性均为可选",
             "type": "object",
             "properties": {
                 "durability": {
-                    "description": "物品耐久度，仅适用于默认具有耐久条的原版物品（如工具、武器、盔甲）",
+                    "description": "物品耐久度,仅适用于默认具有耐久条的原版物品（如工具、武器、盔甲）",
                     "type": "integer",
                     "minimum": 1,
                     "examples": [
@@ -162,14 +162,14 @@
                     ]
                 },
                 "stackSize": {
-                    "description": "物品堆叠上限（1-99），超过99或小于1可能导致问题",
+                    "description": "物品堆叠上限（1-99）,超过99或小于1可能导致问题",
                     "type": "integer",
                     "minimum": 1,
                     "maximum": 99,
                     "default": 64
                 },
                 "lore": {
-                    "description": "物品描述文本列表，支持 PlaceholderAPI 简单文本格式",
+                    "description": "物品描述文本列表,支持 PlaceholderAPI 简单文本格式",
                     "type": "array",
                     "items": {
                         "type": "string",
@@ -200,7 +200,7 @@
             }
         },
         "group": {
-            "description": "物品所属的物品组，详见物品组文档",
+            "description": "物品所属的物品组,详见物品组文档",
             "type": "string",
             "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
             "examples": [
@@ -208,11 +208,11 @@
             ]
         },
         "behaviour": {
-            "description": "物品的行为配置，定义特定功能或交互，部分行为互斥（如 trap、shoot、instrument）",
+            "description": "物品的行为配置,定义特定功能或交互,部分行为互斥（如 trap、shoot、instrument）",
             "type": "object",
             "properties": {
                 "armor": {
-                    "description": "定义盔甲行为，使用 Fancypants 着色器或盔甲纹饰",
+                    "description": "定义盔甲行为,使用 Fancypants 着色器或盔甲纹饰",
                     "type": "object",
                     "required": [
                         "slot",
@@ -230,7 +230,7 @@
                             ]
                         },
                         "texture": {
-                            "description": "盔甲纹理路径，位于 'assets/minecraft/textures/models/armor/' 或 'assets/minecraft/textures/trims/models/armor/'",
+                            "description": "盔甲纹理路径,位于 'assets/minecraft/textures/models/armor/' 或 'assets/minecraft/textures/trims/models/armor/'",
                             "type": "string",
                             "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
                             "examples": [
@@ -270,7 +270,7 @@
                     }
                 },
                 "cosmetic": {
-                    "description": "定义装饰品行为，支持头部或胸部槽位",
+                    "description": "定义装饰品行为,支持头部或胸部槽位",
                     "type": "object",
                     "required": [
                         "slot"
@@ -393,7 +393,7 @@
                             "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$"
                         },
                         "onEntityAttack": {
-                            "description": "是否仅在攻击实体时执行命令，否则也在挥动时执行",
+                            "description": "是否仅在攻击实体时执行命令,否则也在挥动时执行",
                             "type": "boolean",
                             "default": true,
                             "examples": [
@@ -451,7 +451,7 @@
                     "type": "object",
                     "properties": {
                         "value": {
-                            "description": "繁殖能力值（1=普通食物，4=面包）",
+                            "description": "繁殖能力值（1=普通食物,4=面包）",
                             "type": "integer",
                             "default": 1
                         }
@@ -462,14 +462,14 @@
                     "type": "object",
                     "properties": {
                         "value": {
-                            "description": "燃料值，决定燃烧时长",
+                            "description": "燃料值,决定燃烧时长",
                             "type": "integer",
                             "default": 10
                         }
                     }
                 },
                 "hoe": {
-                    "description": "定义锄头行为，可耕种农田，消耗1点耐久",
+                    "description": "定义锄头行为,可耕种农田,消耗1点耐久",
                     "type": "object",
                     "properties": {
                         "sound": {
@@ -481,7 +481,7 @@
                     }
                 },
                 "shovel": {
-                    "description": "定义锹行为，可将方块变为路径，消耗1点耐久",
+                    "description": "定义锹行为,可将方块变为路径,消耗1点耐久",
                     "type": "object",
                     "properties": {
                         "sound": {
@@ -492,7 +492,7 @@
                     }
                 },
                 "shears": {
-                    "description": "定义剪刀行为，可剪切方块和植物，消耗1点耐久",
+                    "description": "定义剪刀行为,可剪切方块和植物,消耗1点耐久",
                     "type": "object",
                     "properties": {
                         "sound": {
@@ -527,7 +527,7 @@
                     }
                 },
                 "stripper": {
-                    "description": "定义去皮行为，可剥去原木或刮除铜块，消耗1点耐久",
+                    "description": "定义去皮行为,可剥去原木或刮除铜块,消耗1点耐久",
                     "type": "object",
                     "properties": {
                         "sound": {
@@ -539,7 +539,7 @@
                     }
                 },
                 "trap": {
-                    "description": "定义陷阱行为，可捕获特定实体",
+                    "description": "定义陷阱行为,可捕获特定实体",
                     "type": "object",
                     "required": [
                         "types"
@@ -583,7 +583,7 @@
                     }
                 },
                 "banner_pattern": {
-                    "description": "定义旗帜图案行为，用于织布机",
+                    "description": "定义旗帜图案行为,用于织布机",
                     "type": "object",
                     "properties": {
                         "id": {
@@ -594,7 +594,7 @@
                     }
                 },
                 "bow": {
-                    "description": "定义弓行为，需使用 'minecraft:bow' 作为 vanillaItem",
+                    "description": "定义弓行为,需使用 'minecraft:bow' 作为 vanillaItem",
                     "type": "object",
                     "properties": {
                         "powerMultiplier": {
@@ -636,7 +636,7 @@
                     }
                 },
                 "crossbow": {
-                    "description": "定义弩行为，需使用 'minecraft:crossbow' 作为 vanillaItem",
+                    "description": "定义弩行为,需使用 'minecraft:crossbow' 作为 vanillaItem",
                     "type": "object",
                     "properties": {
                         "powerMultiplier": {
@@ -706,7 +706,7 @@
                     "properties": {}
                 },
                 "trident": {
-                    "description": "定义三叉戟行为（实验性，仅支持 Minecraft 1.21.4 及以上）",
+                    "description": "定义三叉戟行为（实验性,仅支持 Minecraft 1.21.4 及以上）",
                     "type": "object",
                     "properties": {}
                 },
@@ -722,7 +722,7 @@
                     }
                 },
                 "enchantable": {
-                    "description": "定义可附魔行为（1.21.2 反向移植，仅限 1.21.1）",
+                    "description": "定义可附魔行为（1.21.2 反向移植,仅限 1.21.1）",
                     "type": "object",
                     "properties": {
                         "value": {
@@ -733,7 +733,7 @@
                     }
                 },
                 "repairable": {
-                    "description": "定义可修复行为（1.21.2 反向移植，仅限 1.21.1）",
+                    "description": "定义可修复行为（1.21.2 反向移植,仅限 1.21.1）",
                     "type": "object",
                     "properties": {
                         "items": {
@@ -753,20 +753,9 @@
             }
         },
         "components": {
-            "description": "原版 Minecraft 组件（如 minecraft:food、minecraft:tool 等），格式与数据包一致，仅支持 Minecraft 1.20.5 及以上",
-            "type": "object",
+            "description": "原版 Minecraft 数据组件,仅支持 Minecraft 1.20.5 及以上",
             "additionalProperties": true,
-            "examples": [
-                {
-                    "minecraft:food": {
-                        "nutrition": 4,
-                        "saturation_modifier": 0.6
-                    },
-                    "minecraft:tool": {
-                        "default_mining_speed": 1.0
-                    }
-                }
-            ]
+            "$ref": "./other/component.json#"
         }
     },
     "examples": [

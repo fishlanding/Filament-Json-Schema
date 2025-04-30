@@ -1,0 +1,1281 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Minecraft 数据组件配置",
+    "description": "原版 Minecraft 数据组件,仅支持 Minecraft 1.20.5 及以上",
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+        "minecraft:custom_data": {
+            "description": "存储自定义 NBT 数据",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "minecraft:max_stack_size": {
+            "description": "定义物品的最大堆叠数量",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 99
+        },
+        "minecraft:max_damage": {
+            "description": "定义物品的最大耐久度",
+            "type": "integer",
+            "minimum": 1
+        },
+        "minecraft:damage": {
+            "description": "定义物品的当前耐久损耗",
+            "type": "integer",
+            "minimum": 0
+        },
+        "minecraft:unbreakable": {
+            "description": "定义物品是否不可破坏",
+            "type": "object",
+            "properties": {}
+        },
+        "minecraft:custom_name": {
+            "description": "定义物品的自定义名称",
+            "$ref": "./text_component.json#"
+        },
+        "minecraft:item_name": {
+            "description": "定义物品的显示名称",
+            "type": "object"
+        },
+        "minecraft:lore": {
+            "description": "定义物品的描述文本",
+            "$ref": "./text_component.json#"
+        },
+        "minecraft:rarity": {
+            "description": "定义物品的稀有度,影响显示颜色",
+            "type": "string",
+            "enum": [
+                "common",
+                "uncommon",
+                "rare",
+                "epic"
+            ]
+        },
+        "minecraft:enchantments": {
+            "description": "定义物品的附魔属性,附魔生效并提供对应效果",
+            "type": "object",
+            "properties": {
+                "minecraft:aqua_affinity": {
+                    "description": "提高水下挖掘速度",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1
+                },
+                "minecraft:bane_of_arthropods": {
+                    "description": "对节肢生物造成额外伤害,并施加缓慢效果",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5
+                },
+                "minecraft:blast_protection": {
+                    "description": "减少爆炸伤害和击退效果",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4
+                },
+                "minecraft:breach": {
+                    "description": "减少目标的护甲效果",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4
+                },
+                "minecraft:channeling": {
+                    "description": "在雷暴天气中使被击中的目标召唤闪电",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1
+                },
+                "minecraft:density": {
+                    "description": "增加摔落攻击的伤害",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5
+                },
+                "minecraft:efficiency": {
+                    "description": "提高挖掘速度",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5
+                },
+                "minecraft:feather_falling": {
+                    "description": "减少摔落伤害",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4
+                },
+                "minecraft:fire_aspect": {
+                    "description": "点燃被攻击的目标",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2
+                },
+                "minecraft:fire_protection": {
+                    "description": "减少火焰和岩浆伤害",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4
+                },
+                "minecraft:flame": {
+                    "description": "使箭矢点燃目标",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1
+                },
+                "minecraft:fortune": {
+                    "description": "增加方块掉落物的数量或概率",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 3
+                },
+                "minecraft:impaling": {
+                    "description": "对水生生物或在水中时造成额外伤害",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5
+                },
+                "minecraft:infinity": {
+                    "description": "允许弓无限发射箭矢（无需消耗箭）",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1
+                },
+                "minecraft:knockback": {
+                    "description": "增加攻击的击退效果",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2
+                },
+                "minecraft:looting": {
+                    "description": "增加生物掉落物的数量或概率",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 3
+                },
+                "minecraft:loyalty": {
+                    "description": "使三叉戟在投掷后返回",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 3
+                },
+                "minecraft:luck_of_the_sea": {
+                    "description": "增加钓鱼时获得宝物的概率",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 3
+                },
+                "minecraft:lure": {
+                    "description": "减少钓鱼等待时间",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 3
+                },
+                "minecraft:mending": {
+                    "description": "使用经验值修复物品",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1
+                },
+                "minecraft:multishot": {
+                    "description": "弩一次发射三支箭",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1
+                },
+                "minecraft:piercing": {
+                    "description": "弩箭可穿透多个实体",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4
+                },
+                "minecraft:power": {
+                    "description": "增加弓的伤害",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5
+                },
+                "minecraft:projectile_protection": {
+                    "description": "减少弹射物伤害",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4
+                },
+                "minecraft:protection": {
+                    "description": "减少大部分类型的伤害",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4
+                },
+                "minecraft:punch": {
+                    "description": "增加弓箭的击退效果",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2
+                },
+                "minecraft:quick_charge": {
+                    "description": "减少弩的装填时间",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 3
+                },
+                "minecraft:respiration": {
+                    "description": "延长水下呼吸时间并提高水下视野清晰度",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 3
+                },
+                "minecraft:riptide": {
+                    "description": "使玩家在投掷三叉戟时向前冲刺（仅在水中或雨中有效）",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 3
+                },
+                "minecraft:sharpness": {
+                    "description": "增加近战伤害",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5
+                },
+                "minecraft:silk_touch": {
+                    "description": "允许方块以原始形式掉落",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1
+                },
+                "minecraft:smite": {
+                    "description": "对亡灵生物造成额外伤害",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5
+                },
+                "minecraft:soul_speed": {
+                    "description": "增加在灵魂沙和灵魂土壤上的移动速度",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 3
+                },
+                "minecraft:sweeping_edge": {
+                    "description": "增加横扫攻击的伤害",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 3
+                },
+                "minecraft:swift_sneak": {
+                    "description": "增加潜行时的移动速度",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 3
+                },
+                "minecraft:thorns": {
+                    "description": "对攻击者造成反弹伤害",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 3
+                },
+                "minecraft:unbreaking": {
+                    "description": "减少物品耐久度消耗的概率",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 3
+                },
+                "minecraft:vanishing_curse": {
+                    "description": "物品在玩家死亡后消失",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1
+                },
+                "minecraft:wind_burst": {
+                    "description": "击中目标时产生风爆效果,造成击退",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 3
+                }
+            }
+        },
+        "minecraft:stored_enchantments": {
+            "description": "定义物品的附魔属性,附魔生效并提供对应效果,存储无活性魔咒,通常用于附魔书",
+            "$ref": "#/properties/minecraft:enchantments"
+        },
+        "minecraft:can_place_on": {
+            "description": "定义物品可放置的方块",
+            "type": "object",
+            "properties": {
+                "blocks": {
+                    "description": "可放置的方块列表",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "block": {
+                                "description": "方块标识符",
+                                "type": "string"
+                            },
+                            "state": {
+                                "description": "方块状态的键值对",
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "minecraft:can_break": {
+            "description": "定义物品可破坏的方块",
+            "$ref": "#/properties/minecraft:can_place_on"
+        },
+        "minecraft:lock": {
+            "description": "锁定物品,控制部分方块的上锁数据,玩家需使用符合指定物品谓词的物品才能打开拥有此组件的方块",
+            "type": "object",
+            "properties": {
+                "components": {
+                    "description": "检查物品的物品堆叠组件,需与检测内容完全匹配",
+                    "$ref": "#"
+                },
+                "count": {
+                    "description": "检查物品堆叠的数量,匹配精确值或范围",
+                    "type": [
+                        "integer",
+                        "object"
+                    ],
+                    "oneOf": [
+                        {
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "min": {
+                                    "type": "integer",
+                                    "minimum": 1
+                                },
+                                "max": {
+                                    "type": "integer",
+                                    "minimum": 1
+                                }
+                            },
+                            "required": [
+                                "min",
+                                "max"
+                            ],
+                            "additionalProperties": false
+                        }
+                    ]
+                },
+                "items": {
+                    "description": "匹配的物品,可以是物品标签、单个物品ID或物品ID列表",
+                    "type": [
+                        "string",
+                        "array"
+                    ],
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "pattern": "^(#)?[a-z0-9_]+(:[a-z0-9_]+)?$"
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "pattern": "^(#)?[a-z0-9_]+(:[a-z0-9_]+)?$"
+                            },
+                            "minItems": 1
+                        }
+                    ]
+                },
+                "predicates": {
+                    "description": "检查物品的某个物品堆叠组件是否满足特定条件",
+                    "type": "object",
+                    "additionalProperties": {
+                        "description": "数据组件谓词类型ID及检查内容",
+                        "type": [
+                            "string",
+                            "number",
+                            "boolean",
+                            "object",
+                            "array"
+                        ]
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "minecraft:attribute_modifiers": {
+            "description": "存储物品的属性修饰符",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "description": "属性类型（命名空间ID）,指定修饰的属性",
+                        "type": "string"
+                    },
+                    "slot": {
+                        "description": "修饰符生效的装备槽位,默认为'any'",
+                        "type": "string",
+                        "enum": [
+                            "any",
+                            "mainhand",
+                            "offhand",
+                            "head",
+                            "chest",
+                            "legs",
+                            "feet"
+                        ]
+                    },
+                    "id": {
+                        "description": "修饰符的唯一标识符（命名空间ID）",
+                        "type": "string"
+                    },
+                    "amount": {
+                        "description": "修饰值,调整属性的数值",
+                        "type": "number"
+                    },
+                    "operation": {
+                        "description": "修饰符对属性基础值的运算方式",
+                        "type": "string",
+                        "enum": [
+                            "add_value",
+                            "add_multiplied_base",
+                            "add_multiplied_total"
+                        ]
+                    },
+                    "display": {
+                        "description": "控制属性修饰符在提示框中的显示方式,默认为{'type': 'default'}",
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "description": "显示类型",
+                                "type": "string",
+                                "enum": [
+                                    "default",
+                                    "hidden",
+                                    "override"
+                                ]
+                            },
+                            "value": {
+                                "description": "当type为'override'时,替换显示的文本（文本组件）",
+                                "type": "array",
+                                "items": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "type",
+                    "id",
+                    "amount",
+                    "operation"
+                ]
+            }
+        },
+        "minecraft:dyed_color": {
+            "description": "定义物品的染色属性",
+            "type": [
+                "integer",
+                "array"
+            ],
+            "oneOf": [
+                {
+                    "type": "integer",
+                    "description": "单一整数表示RGB颜色,占用后24位（每个颜色通道8位,按红、绿、蓝顺序存储）",
+                    "minimum": 0,
+                    "maximum": 16777215
+                },
+                {
+                    "type": "array",
+                    "description": "包含三个单精度浮点数的数组,分别表示红（R）、绿（G）、蓝（B）颜色分量",
+                    "items": {
+                        "type": "number",
+                        "description": "颜色分量（R、G或B）,范围为0到255",
+                        "minimum": 0,
+                        "maximum": 255
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                }
+            ]
+        },
+        "minecraft:map_color": {
+            "description": "定义地图物品的颜色",
+            "type": "integer"
+        },
+        "minecraft:enchantment_glint_override": {
+            "description": "覆盖物品的附魔闪光效果",
+            "type": "boolean",
+            "default": false,
+            "examples": [
+                true,
+                false
+            ]
+        },
+        "minecraft:food": {
+            "description": "定义物品的食物属性,决定其是否可以食用以及食用效果",
+            "type": "object",
+            "properties": {
+                "nutrition": {
+                    "description": "食物提供的饱食度恢复量",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "saturation_modifier": {
+                    "description": "饱和度修正值,影响饱和度的恢复效果",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "can_always_eat": {
+                    "description": "是否可以在饱食状态下食用",
+                    "type": "boolean"
+                },
+                "eat_seconds": {
+                    "description": "食用所需时间（秒）",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "effects": {
+                    "description": "食用后触发的状态效果列表",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "effect": {
+                                "description": "状态效果的标识符",
+                                "type": "string"
+                            },
+                            "duration": {
+                                "description": "效果持续时间（tick）",
+                                "type": "integer",
+                                "minimum": 0
+                            },
+                            "amplifier": {
+                                "description": "效果强度等级",
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 255
+                            },
+                            "chance": {
+                                "description": "触发效果的概率",
+                                "type": "number",
+                                "minimum": 0.0,
+                                "maximum": 1.0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "minecraft:damage_resistant": {
+            "description": "定义物品免疫的伤害类型",
+            "type": "object",
+            "properties": {
+                "types": {
+                    "description": "物品免疫的伤害",
+                    "type": "string"
+                }
+            }
+        },
+        "minecraft:tool": {
+            "description": "定义物品的工具属性,影响挖掘速度和适用方块",
+            "type": "object",
+            "properties": {
+                "speed": {
+                    "description": "基础挖掘速度",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "block_break_speed": {
+                    "description": "特定方块的挖掘速度加成",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "number",
+                        "minimum": 0
+                    }
+                },
+                "damage_per_block": {
+                    "description": "每次破坏方块的耐久损耗",
+                    "type": "integer",
+                    "minimum": 0
+                }
+            }
+        },
+        "minecraft:use_cooldown": {
+            "description": "定义物品的使用冷却时间",
+            "type": "object",
+            "properties": {
+                "seconds": {
+                    "description": "冷却时间（秒）",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "cooldown_group": {
+                    "description": "冷却组标识符",
+                    "type": "string"
+                }
+            }
+        },
+        "minecraft:use_remainder": {
+            "description": "定义使用物品后剩余的物品",
+            "type": "object",
+            "properties": {
+                "item": {
+                    "description": "使用后剩余的物品标识符",
+                    "type": "string"
+                }
+            }
+        },
+        "minecraft:consumable": {
+            "description": "定义物品的消耗行为（如食用、饮用）",
+            "type": "object",
+            "properties": {
+                "consume_seconds": {
+                    "description": "消耗所需时间（秒）",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "animation": {
+                    "description": "消耗时的动画类型（eat、drink）",
+                    "type": "string",
+                    "enum": [
+                        "eat",
+                        "drink"
+                    ]
+                }
+            }
+        },
+        "minecraft:equippable": {
+            "description": "定义物品可装备的属性",
+            "type": "object",
+            "properties": {
+                "slot": {
+                    "description": "可装备的槽位（head、chest、legs、feet）",
+                    "type": "string",
+                    "enum": [
+                        "head",
+                        "chest",
+                        "legs",
+                        "feet"
+                    ]
+                }
+            }
+        },
+        "minecraft:repairable": {
+            "description": "定义物品可修复的属性",
+            "type": "object",
+            "properties": {
+                "items": {
+                    "description": "可用于修复的物品标识符列表",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "minecraft:enchantable": {
+            "description": "定义物品可附魔的属性",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "附魔价值,影响附魔强度和可能性",
+                    "type": "integer",
+                    "minimum": 1
+                }
+            }
+        },
+        "minecraft:glint": {
+            "description": "定义物品是否显示附魔闪光效果",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "是否显示附魔闪光效果",
+                    "type": "boolean"
+                }
+            }
+        },
+        "minecraft:container": {
+            "description": "定义物品的容器属性（如箱子内容）",
+            "type": "object",
+            "properties": {
+                "contents": {
+                    "description": "容器内的物品列表",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "item": {
+                                "description": "物品标识符",
+                                "type": "string"
+                            },
+                            "count": {
+                                "description": "物品数量",
+                                "type": "integer",
+                                "minimum": 1
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "minecraft:banner_patterns": {
+            "description": "定义旗帜的图案",
+            "type": "object",
+            "properties": {
+                "patterns": {
+                    "description": "旗帜图案列表",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "pattern": {
+                                "description": "图案类型（如 minecraft:square_top_left）",
+                                "type": "string"
+                            },
+                            "color": {
+                                "description": "图案颜色（如 white、red）",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "minecraft:base_color": {
+            "description": "定义旗帜的基础颜色",
+            "type": "object",
+            "properties": {
+                "color": {
+                    "description": "基础颜色（如 white、red）",
+                    "type": "string"
+                }
+            }
+        },
+        "minecraft:map": {
+            "description": "定义地图物品的属性",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "地图的唯一编号",
+                    "type": "integer"
+                }
+            }
+        },
+        "minecraft:filled_map": {
+            "description": "定义已填充地图的属性",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "地图的唯一编号",
+                    "type": "integer"
+                },
+                "scale": {
+                    "description": "地图缩放等级",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 4
+                }
+            }
+        },
+        "minecraft:written_book_content": {
+            "description": "定义成书的内容",
+            "type": "object",
+            "properties": {
+                "title": {
+                    "description": "书名",
+                    "type": "string"
+                },
+                "author": {
+                    "description": "作者名称",
+                    "type": "string"
+                },
+                "pages": {
+                    "description": "书页内容列表（支持 JSON 文本）",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "generation": {
+                    "description": "书的世代（0=原版,1=副本,2=副本的副本,3=破损）",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 3
+                }
+            }
+        },
+        "minecraft:wability_book_content": {
+            "description": "定义书与笔的内容",
+            "type": "object",
+            "properties": {
+                "pages": {
+                    "description": "书页内容列表（支持纯文本）",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "minecraft:potion_contents": {
+            "description": "定义药水或喷溅药水的内容",
+            "type": "object",
+            "properties": {
+                "potion": {
+                    "description": "药水效果标识符",
+                    "type": "string"
+                },
+                "custom_effects": {
+                    "description": "自定义药水效果列表",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "effect": {
+                                "description": "状态效果的标识符",
+                                "type": "string"
+                            },
+                            "duration": {
+                                "description": "效果持续时间（tick）",
+                                "type": "integer",
+                                "minimum": 0
+                            },
+                            "amplifier": {
+                                "description": "效果强度等级",
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 255
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "minecraft:suspicious_stew_effects": {
+            "description": "定义迷之炖菜的状态效果",
+            "type": "object",
+            "properties": {
+                "effects": {
+                    "description": "状态效果列表",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "effect": {
+                                "description": "状态效果的标识符",
+                                "type": "string"
+                            },
+                            "duration": {
+                                "description": "效果持续时间（tick）",
+                                "type": "integer",
+                                "minimum": 0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "minecraft:firework_explosion": {
+            "description": "定义烟花火箭的爆炸效果",
+            "type": "object",
+            "properties": {
+                "shape": {
+                    "description": "爆炸形状（small_ball、large_ball、star、creeper、burst）",
+                    "type": "string",
+                    "enum": [
+                        "small_ball",
+                        "large_ball",
+                        "star",
+                        "creeper",
+                        "burst"
+                    ]
+                },
+                "colors": {
+                    "description": "爆炸颜色 RGB 值列表",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "fade_colors": {
+                    "description": "渐变颜色 RGB 值列表",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "has_trail": {
+                    "description": "是否有拖尾效果",
+                    "type": "boolean"
+                },
+                "has_twinkle": {
+                    "description": "是否有闪烁效果",
+                    "type": "boolean"
+                }
+            }
+        },
+        "minecraft:firework_rocket": {
+            "description": "定义烟花火箭的属性",
+            "type": "object",
+            "properties": {
+                "flight_duration": {
+                    "description": "飞行持续时间（秒）",
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "explosions": {
+                    "description": "爆炸效果列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/properties/minecraft:firework_explosion"
+                    }
+                }
+            }
+        },
+        "minecraft:profile": {
+            "description": "定义玩家头颅的皮肤属性",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "玩家名称",
+                    "type": "string"
+                },
+                "uuid": {
+                    "description": "玩家 UUID",
+                    "type": "string"
+                },
+                "skin": {
+                    "description": "皮肤数据",
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "description": "皮肤纹理 URL",
+                            "type": "string"
+                        },
+                        "model": {
+                            "description": "皮肤模型（classic 或 slim）",
+                            "type": "string",
+                            "enum": [
+                                "classic",
+                                "slim"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "minecraft:note_block_sound": {
+            "description": "定义音符盒的音效",
+            "type": "object",
+            "properties": {
+                "sound": {
+                    "description": "音符盒播放的音效标识符",
+                    "type": "string"
+                }
+            }
+        },
+        "minecraft:banner": {
+            "description": "定义旗帜的图案和颜色",
+            "type": "object",
+            "properties": {
+                "base_color": {
+                    "description": "基础颜色（如 white、red）",
+                    "type": "string"
+                },
+                "patterns": {
+                    "description": "旗帜图案列表",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "pattern": {
+                                "description": "图案类型（如 minecraft:square_top_left）",
+                                "type": "string"
+                            },
+                            "color": {
+                                "description": "图案颜色（如 white、red）",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "minecraft:armor": {
+            "description": "定义盔甲的防护属性",
+            "type": "object",
+            "properties": {
+                "protection": {
+                    "description": "盔甲提供的防护值",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "toughness": {
+                    "description": "盔甲的韧性值",
+                    "type": "number",
+                    "minimum": 0
+                }
+            }
+        },
+        "minecraft:instrument": {
+            "description": "定义号角的音效",
+            "type": "object",
+            "properties": {
+                "sound": {
+                    "description": "号角播放的音效标识符",
+                    "type": "string"
+                },
+                "range": {
+                    "description": "音效传播范围（格）",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "use_duration": {
+                    "description": "使用持续时间（秒）",
+                    "type": "number",
+                    "minimum": 0
+                }
+            }
+        },
+        "minecraft:lodestone_tracker": {
+            "description": "定义指南针的磁石追踪属性",
+            "type": "object",
+            "properties": {
+                "target": {
+                    "description": "追踪的磁石位置",
+                    "type": "object",
+                    "properties": {
+                        "pos": {
+                            "description": "磁石坐标（x, y, z）",
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            },
+                            "minItems": 3,
+                            "maxItems": 3
+                        },
+                        "dimension": {
+                            "description": "磁石所在维度",
+                            "type": "string"
+                        }
+                    }
+                },
+                "tracked": {
+                    "description": "是否正在追踪磁石",
+                    "type": "boolean"
+                }
+            }
+        },
+        "minecraft:ominous_bottle_amplifier": {
+            "description": "定义不祥之瓶的效果强度",
+            "type": "object",
+            "properties": {
+                "amplifier": {
+                    "description": "不祥之兆效果的强度等级",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                }
+            }
+        },
+        "minecraft:recipes": {
+            "description": "定义物品解锁的配方",
+            "type": "object",
+            "properties": {
+                "recipes": {
+                    "description": "解锁的配方标识符列表",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "minecraft:trim": {
+            "description": "定义盔甲的装饰属性",
+            "type": "object",
+            "properties": {
+                "material": {
+                    "description": "装饰材料标识符",
+                    "type": "string"
+                },
+                "pattern": {
+                    "description": "装饰图案标识符",
+                    "type": "string"
+                }
+            }
+        },
+        "minecraft:debug_stick_state": {
+            "description": "定义调试棒的方块状态",
+            "type": "object",
+            "properties": {
+                "states": {
+                    "description": "方块状态的键值对",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "minecraft:entity_data": {
+            "description": "定义物品的实体数据（如刷怪蛋）",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "minecraft:bucket_entity_data": {
+            "description": "定义水桶实体的属性（如热带鱼）",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "description": "实体类型标识符",
+                    "type": "string"
+                },
+                "data": {
+                    "description": "实体数据",
+                    "type": "object",
+                    "additionalProperties": true
+                }
+            }
+        },
+        "minecraft:block_entity_data": {
+            "description": "定义方块实体的属性",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "minecraft:jukebox_playable": {
+            "description": "定义唱片机的可播放属性",
+            "type": "object",
+            "properties": {
+                "song": {
+                    "description": "可播放的音乐标识符",
+                    "type": "string"
+                }
+            }
+        },
+        "minecraft:container_loot": {
+            "description": "定义容器的随机战利品表",
+            "type": "object",
+            "properties": {
+                "loot_table": {
+                    "description": "战利品表标识符",
+                    "type": "string"
+                },
+                "seed": {
+                    "description": "随机种子",
+                    "type": "integer"
+                }
+            }
+        },
+        "minecraft:bundle_contents": {
+            "description": "定义包裹的物品内容",
+            "type": "object",
+            "properties": {
+                "items": {
+                    "description": "包裹内的物品列表",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "item": {
+                                "description": "物品标识符",
+                                "type": "string"
+                            },
+                            "count": {
+                                "description": "物品数量",
+                                "type": "integer",
+                                "minimum": 1
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "minecraft:charged_projectiles": {
+            "description": "定义弩的弹药内容",
+            "type": "object",
+            "properties": {
+                "projectiles": {
+                    "description": "弹药物品列表",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "item": {
+                                "description": "弹药物品标识符",
+                                "type": "string"
+                            },
+                            "count": {
+                                "description": "弹药数量",
+                                "type": "integer",
+                                "minimum": 1
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "minecraft:bees": {
+            "description": "定义蜂箱中的蜜蜂数据",
+            "type": "object",
+            "properties": {
+                "bees": {
+                    "description": "蜜蜂实体数据列表",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "entity_data": {
+                                "description": "蜜蜂的实体数据",
+                                "type": "object",
+                                "additionalProperties": true
+                            },
+                            "ticks_in_hive": {
+                                "description": "蜜蜂在蜂箱中的时间（tick）",
+                                "type": "integer",
+                                "minimum": 0
+                            },
+                            "min_ticks_in_hive": {
+                                "description": "蜜蜂在蜂箱中的最短时间（tick）",
+                                "type": "integer",
+                                "minimum": 0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "minecraft:block_state": {
+            "description": "定义方块的状态属性",
+            "type": "object",
+            "properties": {
+                "states": {
+                    "description": "方块状态的键值对",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "minecraft:pot_decorations": {
+            "description": "定义装饰陶罐的图案",
+            "type": "object",
+            "properties": {
+                "sherds": {
+                    "description": "陶罐的图案（碎片）标识符列表",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "minItems": 4,
+                    "maxItems": 4
+                }
+            }
+        }
+    }
+}

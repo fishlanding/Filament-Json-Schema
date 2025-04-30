@@ -26,13 +26,17 @@
 ```
 ├─.vscode
 │      settings.json
-│      
+│
 └─filament-schema
-        block.json
-        decoration.json
-        entity.json
-        item-groups.json
-        item.json
+    │  block.json
+    │  decoration.json
+    │  entity.json
+    │  item-groups.json
+    │  item.json
+    │
+    └─other
+            component.json
+            text_component.json
 ```
 
 欢迎贡献和改进这些 Schema 定义！

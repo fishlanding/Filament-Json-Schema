@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "自定义方块配置",
-    "description": "用于定义 Filament 数据包中自定义方块的 JSON 架构，支持方块的属性与行为配置。",
+    "description": "用于定义 Filament 数据包中自定义方块的 JSON 架构,支持方块的属性与行为配置",
     "type": "object",
     "required": [
         "id",
@@ -9,7 +9,7 @@
     ],
     "properties": {
         "id": {
-            "description": "方块的唯一标识符，格式为 '<namespace>:<blockname>'",
+            "description": "方块的唯一标识符,格式为 '<namespace>:<blockname>'",
             "type": "string",
             "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
             "examples": [
@@ -18,7 +18,7 @@
             ]
         },
         "vanillaItem": {
-            "description": "客户端显示的原版物品，内部使用 CustomModelData 进行皮肤覆盖，默认为 'minecraft:paper'",
+            "description": "客户端显示的原版物品,内部使用 CustomModelData 进行皮肤覆盖,默认为 'minecraft:paper'",
             "type": "string",
             "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
             "default": "minecraft:paper",
@@ -28,14 +28,14 @@
             ]
         },
         "blockResource": {
-            "description": "方块的资源配置，用于指定不同方块状态的模型",
+            "description": "方块的资源配置,用于指定不同方块状态的模型",
             "type": "object",
             "required": [
                 "models"
             ],
             "properties": {
                 "models": {
-                    "description": "方块模型配置，键为方块状态（如 'count=1' 或 'waterlogged=true'），值为模型路径或模型对象",
+                    "description": "方块模型配置,键为方块状态（如 'count=1' 或 'waterlogged=true'）,值为模型路径或模型对象",
                     "type": "object",
                     "additionalProperties": {
                         "oneOf": [
@@ -54,7 +54,7 @@
                                 ],
                                 "properties": {
                                     "model": {
-                                        "description": "模型路径，格式为 '<namespace>:path/model'",
+                                        "description": "模型路径,格式为 '<namespace>:path/model'",
                                         "type": "string",
                                         "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
                                         "examples": [
@@ -63,7 +63,7 @@
                                         ]
                                     },
                                     "x": {
-                                        "description": "X轴旋转角度（度），用于模型朝向调整",
+                                        "description": "X轴旋转角度（度）,用于模型朝向调整",
                                         "type": "integer",
                                         "enum": [
                                             0,
@@ -76,7 +76,7 @@
                                         ]
                                     },
                                     "y": {
-                                        "description": "Y轴旋转角度（度），用于模型朝向调整",
+                                        "description": "Y轴旋转角度（度）,用于模型朝向调整",
                                         "type": "integer",
                                         "enum": [
                                             0,
@@ -112,7 +112,7 @@
                                     ],
                                     "properties": {
                                         "model": {
-                                            "description": "默认模型路径，格式为 '<namespace>:path/model'",
+                                            "description": "默认模型路径,格式为 '<namespace>:path/model'",
                                             "type": "string",
                                             "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
                                             "examples": [
@@ -120,7 +120,7 @@
                                             ]
                                         },
                                         "x": {
-                                            "description": "X轴旋转角度（度），用于模型朝向调整",
+                                            "description": "X轴旋转角度（度）,用于模型朝向调整",
                                             "type": "integer",
                                             "enum": [
                                                 0,
@@ -133,7 +133,7 @@
                                             ]
                                         },
                                         "y": {
-                                            "description": "Y轴旋转角度（度），用于模型朝向调整",
+                                            "description": "Y轴旋转角度（度）,用于模型朝向调整",
                                             "type": "integer",
                                             "enum": [
                                                 0,
@@ -157,11 +157,11 @@
             }
         },
         "itemResource": {
-            "description": "物品的资源配置，用于指定不同物品状态的模型",
+            "description": "物品的资源配置,用于指定不同物品状态的模型",
             "type": "object",
             "properties": {
                 "models": {
-                    "description": "物品模型配置，键为状态（如 'default' 或 'trapped'），值为模型路径",
+                    "description": "物品模型配置,键为状态（如 'default' 或 'trapped'）,值为模型路径",
                     "type": "object",
                     "properties": {
                         "default": {
@@ -184,7 +184,7 @@
             }
         },
         "itemModel": {
-            "description": "物品模型定义路径，覆盖 itemResource 字段，位于 'assets/namespace/items/<name>.json'",
+            "description": "物品模型定义路径,覆盖 itemResource 字段,位于 'assets/namespace/items/<name>.json'",
             "type": "string",
             "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
             "examples": [
@@ -192,7 +192,7 @@
             ]
         },
         "blockModelType": {
-            "description": "方块模型类型，决定方块的渲染和碰撞箱，部分行为可能要求此字段为空。支持映射到方块状态（如 'waterlogged=true'）。",
+            "description": "方块模型类型,决定方块的渲染和碰撞箱,部分行为可能要求此字段为空支持映射到方块状态（如 'waterlogged=true'）",
             "oneOf": [
                 {
                     "type": "string",
@@ -273,7 +273,7 @@
             ]
         },
         "virtual": {
-            "description": "是否将方块标记为虚拟方块，使用空的方块模型和虚拟物品展示实体。默认为 false",
+            "description": "是否将方块标记为虚拟方块,使用空的方块模型和虚拟物品展示实体默认为 false",
             "type": "boolean",
             "default": false,
             "examples": [
@@ -282,11 +282,11 @@
             ]
         },
         "properties": {
-            "description": "方块的附加属性，定义物理和交互行为",
+            "description": "方块的附加属性,定义物理和交互行为",
             "type": "object",
             "properties": {
                 "lore": {
-                    "description": "物品描述文本列表，支持 PlaceholderAPI 简单文本格式",
+                    "description": "物品描述文本列表,支持 PlaceholderAPI 简单文本格式",
                     "type": "array",
                     "items": {
                         "type": "string",
@@ -307,7 +307,7 @@
                     }
                 },
                 "blockBase": {
-                    "description": "基础方块，用于声音和地图上的方块颜色，默认为 'minecraft:stone'",
+                    "description": "基础方块,用于声音和地图上的方块颜色,默认为 'minecraft:stone'",
                     "type": "string",
                     "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
                     "default": "minecraft:stone",
@@ -317,7 +317,7 @@
                     ]
                 },
                 "requiresTool": {
-                    "description": "是否需要特定工具来挖掘方块，默认为 true",
+                    "description": "是否需要特定工具来挖掘方块,默认为 true",
                     "type": "boolean",
                     "default": true,
                     "examples": [
@@ -326,7 +326,7 @@
                     ]
                 },
                 "explosionResistance": {
-                    "description": "方块的爆炸抗性，默认为 0",
+                    "description": "方块的爆炸抗性,默认为 0",
                     "type": "number",
                     "minimum": 0,
                     "default": 0,
@@ -335,7 +335,7 @@
                     ]
                 },
                 "destroyTime": {
-                    "description": "破坏方块所需时间，-1 表示不可破坏，默认为 0。对于瞬破方块（如 plant_block），必须设为 0",
+                    "description": "破坏方块所需时间,-1 表示不可破坏,默认为 0对于瞬破方块（如 plant_block）,必须设为 0",
                     "type": "number",
                     "minimum": -1,
                     "default": 0,
@@ -346,7 +346,7 @@
                     ]
                 },
                 "redstoneConductor": {
-                    "description": "方块是否传导红石信号，可映射到方块状态，默认为 true",
+                    "description": "方块是否传导红石信号,可映射到方块状态,默认为 true",
                     "oneOf": [
                         {
                             "type": "boolean",
@@ -371,7 +371,7 @@
                     ]
                 },
                 "lightEmission": {
-                    "description": "方块发光等级（0-15），可映射到方块状态，默认为 0",
+                    "description": "方块发光等级（0-15）,可映射到方块状态,默认为 0",
                     "oneOf": [
                         {
                             "type": "integer",
@@ -400,7 +400,7 @@
                     ]
                 },
                 "transparent": {
-                    "description": "方块是否透明（不阻挡光线），默认为 false",
+                    "description": "方块是否透明（不阻挡光线）,默认为 false",
                     "type": "boolean",
                     "default": false,
                     "examples": [
@@ -409,7 +409,7 @@
                     ]
                 },
                 "isSuffocating": {
-                    "description": "方块是否会导致窒息伤害，未设置时无默认值",
+                    "description": "方块是否会导致窒息伤害,未设置时无默认值",
                     "type": "boolean",
                     "examples": [
                         true,
@@ -417,7 +417,7 @@
                     ]
                 },
                 "jumpFactor": {
-                    "description": "方块的跳跃因子，低于 1 表示粘性，高于 1 表示弹跳，默认为 1.0",
+                    "description": "方块的跳跃因子,低于 1 表示粘性,高于 1 表示弹跳,默认为 1.0",
                     "type": "number",
                     "default": 1.0,
                     "examples": [
@@ -426,7 +426,7 @@
                     ]
                 },
                 "allowsSpawning": {
-                    "description": "是否允许生物在方块上生成，默认为 false",
+                    "description": "是否允许生物在方块上生成,默认为 false",
                     "type": "boolean",
                     "default": false,
                     "examples": [
@@ -435,7 +435,7 @@
                     ]
                 },
                 "replaceable": {
-                    "description": "方块是否可被其他方块替换（如放置新方块时），默认为 false",
+                    "description": "方块是否可被其他方块替换（如放置新方块时）,默认为 false",
                     "type": "boolean",
                     "default": false,
                     "examples": [
@@ -444,7 +444,7 @@
                     ]
                 },
                 "collision": {
-                    "description": "方块是否具有碰撞箱，默认为 true",
+                    "description": "方块是否具有碰撞箱,默认为 true",
                     "type": "boolean",
                     "default": true,
                     "examples": [
@@ -453,12 +453,12 @@
                     ]
                 },
                 "solid": {
-                    "description": "方块是否会被水冲走，默认为 true",
+                    "description": "方块是否会被水冲走,默认为 true",
                     "type": "boolean",
                     "default": true
                 },
                 "pushReaction": {
-                    "description": "方块被活塞推动时的反应，默认为 'normal'",
+                    "description": "方块被活塞推动时的反应,默认为 'normal'",
                     "type": "string",
                     "enum": [
                         "normal",
@@ -472,7 +472,7 @@
                     ]
                 },
                 "lootTable": {
-                    "description": "方块的掉落表，默认为 '<namespace>:blocks/<blockname>'",
+                    "description": "方块的掉落表,默认为 '<namespace>:blocks/<blockname>'",
                     "type": "string",
                     "pattern": "^[a-z0-9_]+:[a-z0-9_/.]+$",
                     "examples": [
@@ -481,11 +481,11 @@
                     ]
                 },
                 "sounds": {
-                    "description": "方块的声音配置，包含音量、音高和各种交互音效",
+                    "description": "方块的声音配置,包含音量、音高和各种交互音效",
                     "type": "object",
                     "properties": {
                         "volume": {
-                            "description": "音量（0.0-1.0），默认为 1",
+                            "description": "音量（0.0-1.0）,默认为 1",
                             "type": "number",
                             "minimum": 0,
                             "maximum": 1,
@@ -496,7 +496,7 @@
                             ]
                         },
                         "pitch": {
-                            "description": "音高（0-2.0），默认为 1",
+                            "description": "音高（0-2.0）,默认为 1",
                             "type": "number",
                             "minimum": 0,
                             "maximum": 2,
@@ -551,7 +551,7 @@
             }
         },
         "blockTags": {
-            "description": "方块标签，用于分类或行为控制",
+            "description": "方块标签,用于分类或行为控制",
             "type": "array",
             "items": {
                 "type": "string",
@@ -569,7 +569,7 @@
             ]
         },
         "itemTags": {
-            "description": "方块物品的标签，用于分类或行为控制",
+            "description": "方块物品的标签,用于分类或行为控制",
             "type": "array",
             "items": {
                 "type": "string",
@@ -593,56 +593,38 @@
             ]
         },
         "components": {
-            "description": "方块物品的 Minecraft 组件配置，例如工具属性",
+            "description": "方块物品的 Minecraft 组件配置,例如工具属性",
             "type": "object",
             "additionalProperties": true,
-            "examples": [
-                {
-                    "minecraft:tool": {
-                        "default_mining_speed": 1.0,
-                        "damage_per_block": 2,
-                        "rules": [
-                            {
-                                "speed": 15,
-                                "correct_for_drops": true,
-                                "blocks": "#sword_efficient"
-                            },
-                            {
-                                "speed": 1.5,
-                                "blocks": "cobweb"
-                            }
-                        ]
-                    }
-                }
-            ]
+            "$ref": "./other/component.json#"
         },
         "behaviour": {
-            "description": "方块的行为配置，用于定义方块的独特属性和交互方式，例如水淹、红石、作物生长等",
+            "description": "方块的行为配置,用于定义方块的独特属性和交互方式,例如水淹、红石、作物生长等",
             "type": "object",
             "additionalProperties": true,
             "properties": {
                 "axis": {
-                    "description": "为方块提供类似于木头或柱子的轴向属性（axis）和放置处理，支持 x、y、z 轴",
+                    "description": "为方块提供类似于木头或柱子的轴向属性（axis）和放置处理,支持 x、y、z 轴",
                     "type": "object",
                     "properties": {}
                 },
                 "count": {
-                    "description": "为方块提供计数属性（count），类似于海龟蛋或蜡烛，允许堆叠多个方块",
+                    "description": "为方块提供计数属性（count）,类似于海龟蛋或蜡烛,允许堆叠多个方块",
                     "type": "object",
                     "properties": {}
                 },
                 "facing": {
-                    "description": "为方块提供朝向属性（facing），支持所有方向（北、南、东、西、上、下）并处理放置逻辑",
+                    "description": "为方块提供朝向属性（facing）,支持所有方向（北、南、东、西、上、下）并处理放置逻辑",
                     "type": "object",
                     "properties": {}
                 },
                 "horizontal_facing": {
-                    "description": "为方块提供水平朝向属性（horizontal_facing），类似于熔炉或把手，仅支持北、南、东、西",
+                    "description": "为方块提供水平朝向属性（horizontal_facing）,类似于熔炉或把手,仅支持北、南、东、西",
                     "type": "object",
                     "properties": {}
                 },
                 "crop": {
-                    "description": "使方块表现为作物，支持生长、骨粉加速、最低光照要求等行为，可配置生长加成",
+                    "description": "使方块表现为作物,支持生长、骨粉加速、最低光照要求等行为,可配置生长加成",
                     "type": "object",
                     "properties": {
                         "maxAge": {
@@ -661,7 +643,7 @@
                             "default": 1
                         },
                         "bonusBlock": {
-                            "description": "用于生长加成的方块，越多生长越快",
+                            "description": "用于生长加成的方块,越多生长越快",
                             "type": "string",
                             "default": "minecraft:farmland"
                         },
@@ -686,7 +668,7 @@
                     }
                 },
                 "sapling": {
-                    "description": "使方块表现为树苗，支持随机生长和骨粉处理，可配置树木生成",
+                    "description": "使方块表现为树苗,支持随机生长和骨粉处理,可配置树木生成",
                     "type": "object",
                     "properties": {
                         "stage": {
@@ -744,7 +726,7 @@
                     }
                 },
                 "can_survive": {
-                    "description": "检查方块下方支撑方块，若无支撑则方块断裂，适用于植物、作物等",
+                    "description": "检查方块下方支撑方块,若无支撑则方块断裂,适用于植物、作物等",
                     "type": "object",
                     "properties": {
                         "blocks": {
@@ -764,11 +746,11 @@
                     }
                 },
                 "powersource": {
-                    "description": "将方块定义为红石电源，可配置红石信号强度",
+                    "description": "将方块定义为红石电源,可配置红石信号强度",
                     "type": "object",
                     "properties": {
                         "value": {
-                            "description": "方块发出的红石信号强度，可映射到方块状态",
+                            "description": "方块发出的红石信号强度,可映射到方块状态",
                             "type": [
                                 "integer",
                                 "object"
@@ -778,7 +760,7 @@
                     }
                 },
                 "repeater": {
-                    "description": "将方块定义为红石中继器，支持配置延迟和信号损失",
+                    "description": "将方块定义为红石中继器,支持配置延迟和信号损失",
                     "type": "object",
                     "properties": {
                         "delay": {
@@ -794,7 +776,7 @@
                     }
                 },
                 "powerlevel": {
-                    "description": "为方块提供红石信号级别（powerlevel）状态，根据输入信号变化",
+                    "description": "为方块提供红石信号级别（powerlevel）状态,根据输入信号变化",
                     "type": "object",
                     "properties": {
                         "max": {
@@ -806,7 +788,7 @@
                     }
                 },
                 "strippable": {
-                    "description": "将方块定义为可剥离，使用斧头交互时替换为另一方块",
+                    "description": "将方块定义为可剥离,使用斧头交互时替换为另一方块",
                     "type": "object",
                     "properties": {
                         "replacement": {
@@ -820,7 +802,7 @@
                     }
                 },
                 "slab": {
-                    "description": "将方块定义为台阶，支持顶部、底部、双层放置及水淹",
+                    "description": "将方块定义为台阶,支持顶部、底部、双层放置及水淹",
                     "type": "object",
                     "properties": {
                         "type": {
@@ -839,7 +821,7 @@
                     }
                 },
                 "trapdoor": {
-                    "description": "将方块定义为活板门，支持朝向、开合、水淹等属性",
+                    "description": "将方块定义为活板门,支持朝向、开合、水淹等属性",
                     "type": "object",
                     "properties": {
                         "facing": {
@@ -893,7 +875,7 @@
                     }
                 },
                 "door": {
-                    "description": "将方块定义为门，高度为2格，支持铰链、开合等属性",
+                    "description": "将方块定义为门,高度为2格,支持铰链、开合等属性",
                     "type": "object",
                     "properties": {
                         "facing": {
@@ -953,7 +935,7 @@
                     }
                 },
                 "simple_waterloggable": {
-                    "description": "使方块支持简单的水淹行为，自动处理水淹状态",
+                    "description": "使方块支持简单的水淹行为,自动处理水淹状态",
                     "type": "object",
                     "properties": {
                         "waterlogged": {
@@ -967,18 +949,18 @@
                     }
                 },
                 "drop_xp": {
-                    "description": "使方块在挖掘时（无精准采集）掉落经验值，可映射到方块状态",
+                    "description": "使方块在挖掘时（无精准采集）掉落经验值,可映射到方块状态",
                     "type": "object",
                     "properties": {
                         "min": {
-                            "description": "掉落的最小经验值，可映射到方块状态",
+                            "description": "掉落的最小经验值,可映射到方块状态",
                             "type": [
                                 "integer",
                                 "object"
                             ]
                         },
                         "max": {
-                            "description": "掉落的最大经验值，可映射到方块状态",
+                            "description": "掉落的最大经验值,可映射到方块状态",
                             "type": [
                                 "integer",
                                 "object"
@@ -1083,7 +1065,7 @@
                     }
                 },
                 "oxidizable": {
-                    "description": "使方块具有氧化行为，类似铜方块，随时间替换为其他方块",
+                    "description": "使方块具有氧化行为,类似铜方块,随时间替换为其他方块",
                     "type": "object",
                     "properties": {
                         "replacement": {
@@ -1104,7 +1086,7 @@
                     }
                 },
                 "budding": {
-                    "description": "使方块具有生长其他方块的行为，类似紫水晶母岩，可配置生长方向和方块",
+                    "description": "使方块具有生长其他方块的行为,类似紫水晶母岩,可配置生长方向和方块",
                     "type": "object",
                     "properties": {
                         "chance": {
@@ -1147,7 +1129,7 @@
                     }
                 },
                 "grass_spread": {
-                    "description": "使方块像草或菌丝一样扩散，基于随机刻",
+                    "description": "使方块像草或菌丝一样扩散,基于随机刻",
                     "type": "object",
                     "properties": {
                         "decayBlockState": {
@@ -1178,7 +1160,7 @@
                     }
                 },
                 "falling_block": {
-                    "description": "使方块受重力影响，像沙子或铁砧一样下落",
+                    "description": "使方块受重力影响,像沙子或铁砧一样下落",
                     "type": "object",
                     "properties": {
                         "delayAfterPlace": {
@@ -1250,7 +1232,7 @@
                     }
                 },
                 "tnt": {
-                    "description": "使方块可被打火石或红石点燃，生成 TNT 实体",
+                    "description": "使方块可被打火石或红石点燃,生成 TNT 实体",
                     "type": "object",
                     "properties": {
                         "unstable": {
@@ -1280,7 +1262,7 @@
                     }
                 },
                 "furnace": {
-                    "description": "使方块具有熔炉行为，包含菜单界面，需配合水平朝向行为",
+                    "description": "使方块具有熔炉行为,包含菜单界面,需配合水平朝向行为",
                     "type": "object",
                     "properties": {
                         "lit": {
@@ -1294,7 +1276,7 @@
                     }
                 },
                 "hopper": {
-                    "description": "使方块具有漏斗行为，包含菜单界面，支持物品过滤和传输",
+                    "description": "使方块具有漏斗行为,包含菜单界面,支持物品过滤和传输",
                     "type": "object",
                     "properties": {
                         "facing": {

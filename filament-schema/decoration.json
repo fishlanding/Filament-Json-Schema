@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "自定义装饰配置",
-    "description": "用于定义 Filament 数据包中自定义装饰的 JSON 架构，定义装饰的外观、行为和属性等配置。",
+    "description": "用于定义 Filament 数据包中自定义装饰的 JSON 架构,定义装饰的外观、行为和属性等配置",
     "type": "object",
     "required": [
         "id",
@@ -9,7 +9,7 @@
     ],
     "properties": {
         "id": {
-            "description": "装饰的唯一标识符，格式为 '<namespace>:<decorationname>'，仅允许小写字母、数字、下划线和斜杠。",
+            "description": "装饰的唯一标识符,格式为 '<namespace>:<decorationname>',仅允许小写字母、数字、下划线和斜杠",
             "type": "string",
             "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
             "examples": [
@@ -18,7 +18,7 @@
             ]
         },
         "vanillaItem": {
-            "description": "用作装饰基础的原版 Minecraft 物品，仅允许原版物品 ID。",
+            "description": "用作装饰基础的原版 Minecraft 物品,仅允许原版物品 ID",
             "type": "string",
             "pattern": "^minecraft:[a-z_]+$",
             "examples": [
@@ -27,7 +27,7 @@
             ]
         },
         "itemFrame": {
-            "description": "是否使用物品展示框（item frame）而非物品展示实体和交互实体来显示装饰。",
+            "description": "是否使用物品展示框（item frame）而非物品展示实体和交互实体来显示装饰",
             "type": "boolean",
             "default": false,
             "examples": [
@@ -36,7 +36,7 @@
             ]
         },
         "block": {
-            "description": "当使用 'blocks' 字段时，指定用于装饰的方块，默认为 'minecraft:barrier'。",
+            "description": "当使用 'blocks' 字段时,指定用于装饰的方块,默认为 'minecraft:barrier'",
             "type": "string",
             "pattern": "^minecraft:[a-z_]+(\\[.*\\])?$",
             "examples": [
@@ -45,7 +45,7 @@
             ]
         },
         "translations": {
-            "description": "装饰名称的翻译，支持多种语言。",
+            "description": "装饰名称的翻译,支持多种语言",
             "type": "object",
             "additionalProperties": {
                 "type": "string"
@@ -58,7 +58,7 @@
             ]
         },
         "itemTags": {
-            "description": "装饰的物品标签，用于分类或功能性判定。",
+            "description": "装饰的物品标签,用于分类或功能性判定",
             "type": "array",
             "items": {
                 "type": "string",
@@ -71,7 +71,7 @@
             ]
         },
         "blockTags": {
-            "description": "装饰的方块标签，用于分类或功能性判定。",
+            "description": "装饰的方块标签,用于分类或功能性判定",
             "type": "array",
             "items": {
                 "type": "string",
@@ -84,7 +84,7 @@
             ]
         },
         "group": {
-            "description": "装饰所属的物品组，格式为 '<namespace>:<groupname>'。",
+            "description": "装饰所属的物品组,格式为 '<namespace>:<groupname>'",
             "type": "string",
             "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
             "examples": [
@@ -92,21 +92,21 @@
             ]
         },
         "itemResource": {
-            "description": "装饰的资源配置，定义模型和其他资源。",
+            "description": "装饰的资源配置,定义模型和其他资源",
             "type": "object",
             "required": [
                 "models"
             ],
             "properties": {
                 "models": {
-                    "description": "装饰的模型配置，支持不同放置位置的模型。",
+                    "description": "装饰的模型配置,支持不同放置位置的模型",
                     "type": "object",
                     "required": [
                         "default"
                     ],
                     "properties": {
                         "default": {
-                            "description": "默认模型路径，格式为 '<namespace>:path/model'。",
+                            "description": "默认模型路径,格式为 '<namespace>:path/model'",
                             "type": "string",
                             "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
                             "examples": [
@@ -114,7 +114,7 @@
                             ]
                         },
                         "wall": {
-                            "description": "墙面放置时的模型路径。",
+                            "description": "墙面放置时的模型路径",
                             "type": "string",
                             "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
                             "examples": [
@@ -122,7 +122,7 @@
                             ]
                         },
                         "ceiling": {
-                            "description": "天花板放置时的模型路径。",
+                            "description": "天花板放置时的模型路径",
                             "type": "string",
                             "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
                             "examples": [
@@ -130,7 +130,7 @@
                             ]
                         },
                         "floor": {
-                            "description": "地面放置时的模型路径。",
+                            "description": "地面放置时的模型路径",
                             "type": "string",
                             "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
                             "examples": [
@@ -143,7 +143,7 @@
             }
         },
         "size": {
-            "description": "当未使用 'blocks' 字段时，指定交互实体的自定义尺寸（宽高）。",
+            "description": "当未使用 'blocks' 字段时,指定交互实体的自定义尺寸（宽高）",
             "type": "array",
             "items": {
                 "type": "number"
@@ -158,11 +158,11 @@
             ]
         },
         "properties": {
-            "description": "装饰的附加属性，控制放置、显示和物理行为。",
+            "description": "装饰的附加属性,控制放置、显示和物理行为",
             "type": "object",
             "properties": {
                 "stackSize": {
-                    "description": "物品堆叠的最大数量。",
+                    "description": "物品堆叠的最大数量",
                     "type": "integer",
                     "minimum": 1,
                     "maximum": 64,
@@ -171,7 +171,7 @@
                     ]
                 },
                 "rotate": {
-                    "description": "是否允许装饰以 90° 间隔旋转。",
+                    "description": "是否允许装饰以 90° 间隔旋转",
                     "type": "boolean",
                     "default": false,
                     "examples": [
@@ -180,7 +180,7 @@
                     ]
                 },
                 "rotateSmooth": {
-                    "description": "是否允许装饰以 45° 间隔平滑旋转。",
+                    "description": "是否允许装饰以 45° 间隔平滑旋转",
                     "type": "boolean",
                     "default": false,
                     "examples": [
@@ -189,11 +189,11 @@
                     ]
                 },
                 "placement": {
-                    "description": "装饰的放置位置选项。",
+                    "description": "装饰的放置位置选项",
                     "type": "object",
                     "properties": {
                         "floor": {
-                            "description": "是否允许放置在地面。",
+                            "description": "是否允许放置在地面",
                             "type": "boolean",
                             "default": true,
                             "examples": [
@@ -202,7 +202,7 @@
                             ]
                         },
                         "wall": {
-                            "description": "是否允许放置在墙面。",
+                            "description": "是否允许放置在墙面",
                             "type": "boolean",
                             "default": false,
                             "examples": [
@@ -211,7 +211,7 @@
                             ]
                         },
                         "ceiling": {
-                            "description": "是否允许放置在天花板。",
+                            "description": "是否允许放置在天花板",
                             "type": "boolean",
                             "default": false,
                             "examples": [
@@ -227,7 +227,7 @@
                     }
                 },
                 "glow": {
-                    "description": "是否忽略环境光照，始终以光照等级 15 显示。",
+                    "description": "是否忽略环境光照,始终以光照等级 15 显示",
                     "type": "boolean",
                     "default": false,
                     "examples": [
@@ -236,7 +236,7 @@
                     ]
                 },
                 "waterloggable": {
-                    "description": "装饰的方块是否可被水淹没。",
+                    "description": "装饰的方块是否可被水淹没",
                     "type": "boolean",
                     "default": true,
                     "examples": [
@@ -245,7 +245,7 @@
                     ]
                 },
                 "solid": {
-                    "description": "装饰是否为固体（若为 false，可被水冲走）。",
+                    "description": "装饰是否为固体（若为 false,可被水冲走）",
                     "type": "boolean",
                     "default": true,
                     "examples": [
@@ -254,7 +254,7 @@
                     ]
                 },
                 "display": {
-                    "description": "物品展示实体的显示模式。",
+                    "description": "物品展示实体的显示模式",
                     "type": "string",
                     "enum": [
                         "none",
@@ -270,13 +270,13 @@
                     "default": "fixed"
                 },
                 "blockBase": {
-                    "description": "用于放置和破坏音效及粒子的基础方块，需为原版方块 ID。",
+                    "description": "用于放置和破坏音效及粒子的基础方块,需为原版方块 ID",
                     "type": "string",
                     "pattern": "^minecraft:[a-z_]+$",
                     "default": "minecraft:stone"
                 },
                 "useItemParticles": {
-                    "description": "是否使用物品粒子效果，若为 false 则使用 blockBase 的粒子。",
+                    "description": "是否使用物品粒子效果,若为 false 则使用 blockBase 的粒子",
                     "type": "boolean",
                     "default": true,
                     "examples": [
@@ -285,7 +285,7 @@
                     ]
                 },
                 "showBreakParticles": {
-                    "description": "是否显示破坏粒子效果。",
+                    "description": "是否显示破坏粒子效果",
                     "type": "boolean",
                     "default": true,
                     "examples": [
@@ -296,13 +296,13 @@
             }
         },
         "blocks": {
-            "description": "装饰的方块碰撞配置，指定屏障方块的位置和大小。",
+            "description": "装饰的方块碰撞配置,指定屏障方块的位置和大小",
             "type": "array",
             "items": {
                 "type": "object",
                 "properties": {
                     "origin": {
-                        "description": "方块的起始坐标（x, y, z）。",
+                        "description": "方块的起始坐标（x, y, z）",
                         "type": "array",
                         "items": {
                             "type": "number"
@@ -311,7 +311,7 @@
                         "maxItems": 3
                     },
                     "size": {
-                        "description": "方块的尺寸（宽、高、深）。",
+                        "description": "方块的尺寸（宽、高、深）",
                         "type": "array",
                         "items": {
                             "type": "number"
@@ -327,15 +327,15 @@
             }
         },
         "behaviour": {
-            "description": "装饰的行为配置，定义交互和功能。",
+            "description": "装饰的行为配置,定义交互和功能",
             "type": "object",
             "properties": {
                 "animation": {
-                    "description": "动画行为，支持 Blockbench 或 Animated Java 模型。",
+                    "description": "动画行为,支持 Blockbench 或 Animated Java 模型",
                     "type": "object",
                     "properties": {
                         "model": {
-                            "description": "动画模型的资源路径，格式为 '<namespace>:<modelname>'。",
+                            "description": "动画模型的资源路径,格式为 '<namespace>:<modelname>'",
                             "type": "string",
                             "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
                             "examples": [
@@ -343,7 +343,7 @@
                             ]
                         },
                         "autoplay": {
-                            "description": "自动播放的动画名称。",
+                            "description": "自动播放的动画名称",
                             "type": "string",
                             "examples": [
                                 "idle"
@@ -355,18 +355,18 @@
                     ]
                 },
                 "container": {
-                    "description": "容器行为，用于创建箱子、垃圾桶等。",
+                    "description": "容器行为,用于创建箱子、垃圾桶等",
                     "type": "object",
                     "properties": {
                         "name": {
-                            "description": "容器界面的显示名称。",
+                            "description": "容器界面的显示名称",
                             "type": "string",
                             "examples": [
                                 "Example Chest"
                             ]
                         },
                         "size": {
-                            "description": "容器槽位数量，需为 5 或 9 的倍数，最大 54。",
+                            "description": "容器槽位数量,需为 5 或 9 的倍数,最大 54",
                             "type": "integer",
                             "minimum": 1,
                             "maximum": 54,
@@ -375,7 +375,7 @@
                             ]
                         },
                         "purge": {
-                            "description": "玩家关闭容器时是否清空内容。",
+                            "description": "玩家关闭容器时是否清空内容",
                             "type": "boolean",
                             "default": false,
                             "examples": [
@@ -384,7 +384,7 @@
                             ]
                         },
                         "canPickup": {
-                            "description": "容器是否可被拾取。",
+                            "description": "容器是否可被拾取",
                             "type": "boolean",
                             "default": true,
                             "examples": [
@@ -393,14 +393,14 @@
                             ]
                         },
                         "openAnimation": {
-                            "description": "打开容器时播放的动画名称。",
+                            "description": "打开容器时播放的动画名称",
                             "type": "string",
                             "examples": [
                                 "open"
                             ]
                         },
                         "closeAnimation": {
-                            "description": "关闭容器时播放的动画名称。",
+                            "description": "关闭容器时播放的动画名称",
                             "type": "string",
                             "examples": [
                                 "close"
@@ -413,19 +413,19 @@
                     ]
                 },
                 "lamp": {
-                    "description": "灯具行为，支持开关或光照等级循环。",
+                    "description": "灯具行为,支持开关或光照等级循环",
                     "type": "object",
                     "oneOf": [
                         {
                             "properties": {
                                 "on": {
-                                    "description": "开启状态的光照等级。",
+                                    "description": "开启状态的光照等级",
                                     "type": "integer",
                                     "minimum": 0,
                                     "maximum": 15
                                 },
                                 "off": {
-                                    "description": "关闭状态的光照等级。",
+                                    "description": "关闭状态的光照等级",
                                     "type": "integer",
                                     "minimum": 0,
                                     "maximum": 15
@@ -439,7 +439,7 @@
                         {
                             "properties": {
                                 "cycle": {
-                                    "description": "光照等级循环列表。",
+                                    "description": "光照等级循环列表",
                                     "type": "array",
                                     "items": {
                                         "type": "integer",
@@ -456,11 +456,11 @@
                     ]
                 },
                 "lock": {
-                    "description": "锁行为，需特定钥匙或直接交互执行命令。",
+                    "description": "锁行为,需特定钥匙或直接交互执行命令",
                     "type": "object",
                     "properties": {
                         "key": {
-                            "description": "解锁所需的钥匙物品 ID，若为空则无钥匙要求。",
+                            "description": "解锁所需的钥匙物品 ID,若为空则无钥匙要求",
                             "type": "string",
                             "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
                             "examples": [
@@ -468,7 +468,7 @@
                             ]
                         },
                         "consumeKey": {
-                            "description": "解锁时是否消耗钥匙。",
+                            "description": "解锁时是否消耗钥匙",
                             "type": "boolean",
                             "default": false,
                             "examples": [
@@ -477,7 +477,7 @@
                             ]
                         },
                         "discard": {
-                            "description": "解锁后是否销毁装饰。",
+                            "description": "解锁后是否销毁装饰",
                             "type": "boolean",
                             "default": false,
                             "examples": [
@@ -486,21 +486,21 @@
                             ]
                         },
                         "unlockAnimation": {
-                            "description": "解锁时播放的动画名称。",
+                            "description": "解锁时播放的动画名称",
                             "type": "string",
                             "examples": [
                                 "unlockAnimation"
                             ]
                         },
                         "command": {
-                            "description": "解锁时执行的命令。",
+                            "description": "解锁时执行的命令",
                             "type": "string",
                             "examples": [
                                 "say Unlocked"
                             ]
                         },
                         "atBlock": {
-                            "description": "命令是否在方块位置执行。",
+                            "description": "命令是否在方块位置执行",
                             "type": "boolean",
                             "default": false,
                             "examples": [
@@ -511,18 +511,18 @@
                     }
                 },
                 "interact_execute": {
-                    "description": "与 'lock' 行为相同，用于执行交互命令，兼容旧版本。",
+                    "description": "与 'lock' 行为相同,用于执行交互命令,兼容旧版本",
                     "type": "object",
                     "$ref": "#/properties/behaviour/properties/lock"
                 },
                 "seat": {
-                    "description": "座位行为，用于椅子、长凳等。",
+                    "description": "座位行为,用于椅子、长凳等",
                     "type": "array",
                     "items": {
                         "type": "object",
                         "properties": {
                             "offset": {
-                                "description": "玩家座位的坐标偏移（x, y, z）。",
+                                "description": "玩家座位的坐标偏移（x, y, z）",
                                 "type": "array",
                                 "items": {
                                     "type": "number"
@@ -536,7 +536,7 @@
                                 ]
                             },
                             "direction": {
-                                "description": "座位的旋转角度（度），默认 180。",
+                                "description": "座位的旋转角度（度）,默认 180",
                                 "type": "number",
                                 "default": 180
                             }
@@ -548,13 +548,13 @@
                     "minItems": 1
                 },
                 "showcase": {
-                    "description": "展示行为，用于货架或物品展示框。",
+                    "description": "展示行为,用于货架或物品展示框",
                     "type": "array",
                     "items": {
                         "type": "object",
                         "properties": {
                             "offset": {
-                                "description": "展示物品的坐标偏移（x, y, z）。",
+                                "description": "展示物品的坐标偏移（x, y, z）",
                                 "type": "array",
                                 "items": {
                                     "type": "number"
@@ -563,7 +563,7 @@
                                 "maxItems": 3
                             },
                             "scale": {
-                                "description": "展示物品的缩放比例（x, y, z）。",
+                                "description": "展示物品的缩放比例（x, y, z）",
                                 "type": "array",
                                 "items": {
                                     "type": "number"
@@ -572,7 +572,7 @@
                                 "maxItems": 3
                             },
                             "rotation": {
-                                "description": "展示物品的旋转（x, y, z, w）。",
+                                "description": "展示物品的旋转（x, y, z, w）",
                                 "type": "array",
                                 "items": {
                                     "type": "number"
@@ -581,7 +581,7 @@
                                 "maxItems": 4
                             },
                             "type": {
-                                "description": "展示类型：item（物品），block（方块），dynamic（自动选择）。",
+                                "description": "展示类型：item（物品）,block（方块）,dynamic（自动选择）",
                                 "type": "string",
                                 "enum": [
                                     "item",
@@ -590,7 +590,7 @@
                                 ]
                             },
                             "filterItems": {
-                                "description": "允许展示的物品列表。",
+                                "description": "允许展示的物品列表",
                                 "type": "array",
                                 "items": {
                                     "type": "string",
@@ -598,7 +598,7 @@
                                 }
                             },
                             "filterTags": {
-                                "description": "允许展示的物品标签列表。",
+                                "description": "允许展示的物品标签列表",
                                 "type": "array",
                                 "items": {
                                     "type": "string",
@@ -614,14 +614,14 @@
                     "minItems": 1
                 },
                 "cosmetic": {
-                    "description": "装饰性行为，用于穿戴在玩家身上的装饰。",
+                    "description": "装饰性行为,用于穿戴在玩家身上的装饰",
                     "type": "object",
                     "required": [
                         "slot"
                     ],
                     "properties": {
                         "slot": {
-                            "description": "装饰的装备槽位。",
+                            "description": "装饰的装备槽位",
                             "type": "string",
                             "enum": [
                                 "head",
@@ -635,7 +635,7 @@
                             ]
                         },
                         "model": {
-                            "description": "装饰的动画模型路径，格式为 '<namespace>:<modelname>'。",
+                            "description": "装饰的动画模型路径,格式为 '<namespace>:<modelname>'",
                             "type": "string",
                             "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
                             "examples": [
@@ -643,14 +643,14 @@
                             ]
                         },
                         "autoplay": {
-                            "description": "自动播放的动画名称，需为可循环动画。",
+                            "description": "自动播放的动画名称,需为可循环动画",
                             "type": "string",
                             "examples": [
                                 "idle"
                             ]
                         },
                         "translation": {
-                            "description": "装饰模型的坐标偏移（x, y, z）。",
+                            "description": "装饰模型的坐标偏移（x, y, z）",
                             "type": "array",
                             "items": {
                                 "type": "number"
@@ -664,7 +664,7 @@
                             ]
                         },
                         "scale": {
-                            "description": "装饰模型的缩放比例（x, y, z）。",
+                            "description": "装饰模型的缩放比例（x, y, z）",
                             "type": "array",
                             "items": {
                                 "type": "number"
@@ -680,11 +680,11 @@
                     }
                 },
                 "instrument": {
-                    "description": "乐器行为，定义装饰播放的声音。",
+                    "description": "乐器行为,定义装饰播放的声音",
                     "type": "object",
                     "properties": {
                         "sound": {
-                            "description": "播放的声音资源路径。",
+                            "description": "播放的声音资源路径",
                             "type": "string",
                             "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$",
                             "examples": [
@@ -692,7 +692,7 @@
                             ]
                         },
                         "range": {
-                            "description": "声音传播范围（方块）。",
+                            "description": "声音传播范围（方块）",
                             "type": "integer",
                             "minimum": 1,
                             "examples": [
@@ -700,7 +700,7 @@
                             ]
                         },
                         "useDuration": {
-                            "description": "使用乐器所需的时间（tick）。",
+                            "description": "使用乐器所需的时间（tick）",
                             "type": "integer",
                             "minimum": 1,
                             "examples": [
@@ -717,7 +717,7 @@
             }
         },
         "components": {
-            "description": "Minecraft 组件，用于定义额外的物品功能。",
+            "description": "Minecraft 组件,用于定义额外的物品功能",
             "type": "object",
             "additionalProperties": {
                 "type": "object"

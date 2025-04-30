@@ -1,0 +1,579 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Minecraft 文本组件配置",
+    "description": "用于 Minecraft文本组件",
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+        "text": {
+            "description": "纯文本内容,不会解析为其他组件,优先级低于其他内容类型",
+            "type": "string"
+        },
+        "translate": {
+            "description": "翻译键,用于从语言文件中获取本地化文本,通常与 with 属性配合使用以提供参数",
+            "type": "string"
+        },
+        "with": {
+            "description": "翻译键的参数列表,用于替换 translate 中的占位符,支持字符串或嵌套文本组件",
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#"
+                    }
+                ]
+            }
+        },
+        "score": {
+            "description": "显示计分板中玩家的分数,需指定玩家和计分板目标",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "计分板目标的名称,通常为玩家名或实体选择器",
+                    "type": "string",
+                    "examples": [
+                        "@a",
+                        "@s",
+                        "@r",
+                        "@p"
+                    ]
+                },
+                "objective": {
+                    "description": "计分板目标的名称",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "objective"
+            ]
+        },
+        "selector": {
+            "description": "实体选择器,用于显示匹配实体的名称",
+            "type": "string",
+            "examples": [
+                "@a",
+                "@s",
+                "@r",
+                "@p"
+            ]
+        },
+        "keybind": {
+            "description": "显示按键绑定的名称,引用游戏设置中的按键",
+            "type": "string"
+        },
+        "nbt": {
+            "description": "NBT 路径,用于从实体、方块或存储中提取数据,需配合 block、entity 或 storage",
+            "type": "string"
+        },
+        "interpret": {
+            "description": "是否将 NBT 数据解析为文本组件,默认为 false",
+            "type": "boolean",
+            "default": false,
+            "examples": [
+                true,
+                false
+            ]
+        },
+        "block": {
+            "description": "指定方块的坐标,用于从方块的 NBT 数据中提取信息（如 ~ ~ ~ 或绝对坐标）",
+            "type": "string"
+        },
+        "entity": {
+            "description": "指定实体的选择器,用于从实体的 NBT 数据中提取信息",
+            "type": "string",
+            "examples": [
+                "@a",
+                "@s",
+                "@r",
+                "@p"
+            ]
+        },
+        "storage": {
+            "description": "指定存储的命名空间 ID,用于从数据存储中提取 NBT 数据",
+            "type": "string",
+            "pattern": "^[a-z0-9_]+:[a-z0-9_/]+$"
+        },
+        "color": {
+            "description": "文本颜色,支持 16 种命名颜色或 #RRGGBB 格式的十六进制值",
+            "type": "string",
+            "enum": [
+                "black",
+                "dark_blue",
+                "dark_green",
+                "dark_aqua",
+                "dark_red",
+                "dark_purple",
+                "gold",
+                "gray",
+                "dark_gray",
+                "blue",
+                "green",
+                "aqua",
+                "red",
+                "light_purple",
+                "yellow",
+                "white"
+            ],
+            "pattern": "^#[0-9A-Fa-f]{6}$",
+            "examples": [
+                "red",
+                "#FF0000"
+            ]
+        },
+        "font": {
+            "description": "文本字体,默认为 minecraft:default,可通过资源包自定义",
+            "type": "string",
+            "default": "minecraft:default",
+            "examples": [
+                "minecraft:default",
+                "minecraft:alt"
+            ]
+        },
+        "bold": {
+            "description": "是否加粗显示文本",
+            "type": "boolean",
+            "examples": [
+                true,
+                false
+            ]
+        },
+        "italic": {
+            "description": "是否斜体显示文本",
+            "type": "boolean",
+            "examples": [
+                true,
+                false
+            ]
+        },
+        "underlined": {
+            "description": "是否为文本添加下划线",
+            "type": "boolean",
+            "examples": [
+                true,
+                false
+            ]
+        },
+        "strikethrough": {
+            "description": "是否为文本添加删除线",
+            "type": "boolean",
+            "examples": [
+                true,
+                false
+            ]
+        },
+        "obfuscated": {
+            "description": "是否将文本显示为随机字符（乱码效果）",
+            "type": "boolean",
+            "examples": [
+                true,
+                false
+            ]
+        },
+        "insertion": {
+            "description": "点击文本时插入到聊天输入框的内容",
+            "type": "string"
+        },
+        "click_event": {
+            "description": "点击文本时触发的动作",
+            "type": "object",
+            "properties": {
+                "action": {
+                    "description": "点击动作类型",
+                    "type": "string",
+                    "enum": [
+                        "open_url",
+                        "run_command",
+                        "suggest_command",
+                        "change_page",
+                        "copy_to_clipboard"
+                    ]
+                },
+                "url": {
+                    "description": "当 action 为 open_url 时,指定要打开的 URL",
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https?://"
+                },
+                "command": {
+                    "description": "当 action 为 run_command 或 suggest_command 时,指定的命令字符串",
+                    "type": "string"
+                },
+                "page": {
+                    "description": "当 action 为 change_page 时,指定要跳转到的书页",
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "value": {
+                    "description": "当 action 为 copy_to_clipboard 时,指定要复制到剪贴板的字符串",
+                    "type": "string"
+                },
+                "insertion": {
+                    "description": "按住 Shift 并点击时插入的文本,仅在 suggest_command 动作中生效",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "action"
+            ],
+            "oneOf": [
+                {
+                    "properties": {
+                        "action": {
+                            "const": "open_url"
+                        }
+                    },
+                    "required": [
+                        "url"
+                    ],
+                    "not": {
+                        "anyOf": [
+                            {
+                                "required": [
+                                    "command"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "page"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "value"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "insertion"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "properties": {
+                        "action": {
+                            "const": "run_command"
+                        }
+                    },
+                    "required": [
+                        "command"
+                    ],
+                    "not": {
+                        "anyOf": [
+                            {
+                                "required": [
+                                    "url"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "page"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "value"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "insertion"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "properties": {
+                        "action": {
+                            "const": "suggest_command"
+                        }
+                    },
+                    "required": [
+                        "command"
+                    ],
+                    "not": {
+                        "anyOf": [
+                            {
+                                "required": [
+                                    "url"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "page"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "value"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "properties": {
+                        "action": {
+                            "const": "change_page"
+                        }
+                    },
+                    "required": [
+                        "page"
+                    ],
+                    "not": {
+                        "anyOf": [
+                            {
+                                "required": [
+                                    "url"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "command"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "value"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "insertion"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "properties": {
+                        "action": {
+                            "const": "copy_to_clipboard"
+                        }
+                    },
+                    "required": [
+                        "value"
+                    ],
+                    "not": {
+                        "anyOf": [
+                            {
+                                "required": [
+                                    "url"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "command"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "page"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "insertion"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "additionalProperties": false
+        },
+        "hover_event": {
+            "description": "鼠标悬停时显示的内容",
+            "type": "object",
+            "properties": {
+                "action": {
+                    "description": "悬停动作类型",
+                    "type": "string",
+                    "enum": [
+                        "show_text",
+                        "show_item",
+                        "show_entity"
+                    ]
+                },
+                "value": {
+                    "description": "文本组件,定义要显示的文本内容",
+                    "$ref": "#"
+                },
+                "id": {
+                    "description": "命名空间ID,show_item时表示物品类型,show_entity时表示实体类型",
+                    "type": "string",
+                    "pattern": "^[a-z0-9_.-]+:[a-z0-9_.-]+$"
+                },
+                "count": {
+                    "description": "物品堆叠数量,需为正整数且不超过最大堆叠数,默认为1",
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "components": {
+                    "description": "物品堆叠组件,包含额外信息",
+                    "type": "object",
+                    "additionalProperties": {
+                        "description": "物品组件,命名空间ID作为键,值类型取决于组件",
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "array"
+                            }
+                        ]
+                    }
+                },
+                "name": {
+                    "description": "实体的显示名称（文本组件,无法预解析）",
+                    "$ref": "#"
+                },
+                "uuid": {
+                    "description": "实体的UUID",
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "format": "uuid",
+                            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            },
+                            "minItems": 4,
+                            "maxItems": 4
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "action"
+            ],
+            "additionalProperties": false,
+            "oneOf": [
+                {
+                    "properties": {
+                        "action": {
+                            "const": "show_text"
+                        }
+                    },
+                    "required": [
+                        "value"
+                    ],
+                    "not": {
+                        "anyOf": [
+                            {
+                                "required": [
+                                    "id"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "count"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "components"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "name"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "uuid"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "properties": {
+                        "action": {
+                            "const": "show_item"
+                        }
+                    },
+                    "required": [
+                        "id"
+                    ],
+                    "not": {
+                        "anyOf": [
+                            {
+                                "required": [
+                                    "value"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "name"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "uuid"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "properties": {
+                        "action": {
+                            "const": "show_entity"
+                        }
+                    },
+                    "required": [
+                        "id",
+                        "name",
+                        "uuid"
+                    ],
+                    "not": {
+                        "anyOf": [
+                            {
+                                "required": [
+                                    "value"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "count"
+                                ]
+                            },
+                            {
+                                "required": [
+                                    "components"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "extra": {
+            "description": "附加的文本组件列表,依次显示在主组件之后",
+            "type": "array",
+            "items": {
+                "$ref": "#"
+            }
+        }
+    }
+}
